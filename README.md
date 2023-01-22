@@ -2,11 +2,13 @@
 
 I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of either ``Ubuntu``, ``Pop!_OS``, ``Debian``, or ``Windows 10/11``.
 
+_The scripts below will require modification unless you want my exact setup, which should only be the case if you are me._
+
+## Operating Systems
+
 **Primary Operating System:** [Ubuntu 22.04](https://ubuntu.com/) with [Pop Shell](https://support.system76.com/articles/pop-shell/)  (Was ``Pop!_OS 22.04`` until a kernel update issue, I'll likely go back to it after that is resolved.)
 
 **Virtual Machine:** [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO)
-
-_The scripts below will require modification unless you want my exact setup, which should only be the case if you are me._
 
 ## Hardware
 
@@ -20,11 +22,9 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 **Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
 
+## Workstation Setup
 
-# Workstation Setup
-## DebSetup.sh Script
-
-This script handles all of my application installs and git configurations so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``DebSetup.sh`` was created to work on any ``Debian`` based distrobution, such as ``Ubuntu``, ``Pop!_OS``, ``Mint``, etc.
+The ``WorkstationSetup.sh`` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``WorkstationSetup.sh`` was created to work on any ``Debian`` based distrobution, such as ``Ubuntu``, ``Pop!_OS``, ``Mint``, etc.
 
 Open terminal and copy/paste the following:
 
@@ -32,16 +32,28 @@ Open terminal and copy/paste the following:
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup.git
 cd Setup
-sudo chmod 755 ./DebSetup.sh
+sudo chmod 755 ./WorkstationSetup.sh
 ```
 
-_**Note: DebSetup.sh should be modified before running it so that you can enter your own details in the git config and add or remove any apt packages you might want or not want.  This script is specifically set up for me to use after a fresh image.**_
+_**Note: WorkstationSetup.sh should be modified before running it so that you can enter your own details in the git config and add or remove any apt packages you might want or not want.  This script is specifically set up for me to use after a fresh image.**_
 
 ```
-sudo ./DebSetup.sh
+sudo ./WorkstationSetup.sh
 ```
 
-## Windows 10 VM and WinSetup.ps1 Script
+## Ubuntu Server Setup
+
+The ``ServerSetup.sh`` is similar to the ``WorkstationSetup.sh`` script, but is geared towards installing the essentials that I need for a new ``Ubuntu Server`` virtual machine on any given project that I am working on.
+
+```
+sudo apt install -y git
+git clone https://github.com/Josh-XT/Setup.git
+cd Setup
+sudo chmod 755 ./ServerSetup.sh
+sudo ./ServerSetup.sh
+```
+
+## Windows 10 and WinSetup.ps1 Script
 
 I have a Windows 10 VM just in case I ever need it, but it is honestly pretty rare for me to use it.  The WinSetup.ps1 script sets up a Windows 10/11 machine to be a development machine for me as if it were my desktop environment, because it used to be before I switched back to Linux.
 
@@ -58,18 +70,6 @@ Open PowerShell as Administrator and run the following:
 ```
 Set-ExecutionPolicy Bypass
 .\WinSetup.ps1
-```
-
-# Ubuntu Server Setup
-
-The ``ServerSetup.sh`` is similar to the ``DebSetup.sh`` script, but is geared towards installing the essentials that I need for a new ``Ubuntu Server`` virtual machine on any given project that I am working on.
-
-```
-sudo apt install -y git
-git clone https://github.com/Josh-XT/Setup.git
-cd Setup
-sudo chmod 755 ./ServerSetup.sh
-sudo ./ServerSetup.sh
 ```
 
 ## Mouse Bindings with ``Piper`` for ``Logitech G502``
