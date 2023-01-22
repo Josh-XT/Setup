@@ -18,7 +18,7 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 **Headset** - SteelSeries Arctis 7+
 
-**Mouse** - Logitech G502
+**Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
 
 ## DebSetup.sh Script
 
