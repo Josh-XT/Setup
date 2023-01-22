@@ -12,15 +12,15 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 ## Hardware
 
-**Desktop** - Custom build, Intel Core i9-12900KS, 64GB DDR5-6000, 2TB M2
+**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 64GB DDR5-6000, 2TB M2
 
-**Laptop** - Upgraded HP X360, AMD Ryzen 7 4700U, 32GB DDR4-3200, 512GB M2
+**Secondary Workstation (Laptop)** - Upgraded HP X360, AMD Ryzen 7 4700U, 32GB DDR4-3200, 512GB M2
+
+**Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
 
 **Keyboard** - Logitech K350
 
 **Headset** - SteelSeries Arctis 7+
-
-**Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
 
 ## Workstation Setup
 
