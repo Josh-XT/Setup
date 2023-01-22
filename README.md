@@ -20,6 +20,8 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 **Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
 
+
+# Workstation Setup
 ## DebSetup.sh Script
 
 This script handles all of my application installs and git configurations so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``DebSetup.sh`` was created to work on any ``Debian`` based distrobution, such as ``Ubuntu``, ``Pop!_OS``, ``Mint``, etc.
@@ -56,6 +58,18 @@ Open PowerShell as Administrator and run the following:
 ```
 Set-ExecutionPolicy Bypass
 .\WinSetup.ps1
+```
+
+# Ubuntu Server Setup
+
+The ``ServerSetup.sh`` is similar to the ``DebSetup.sh`` script, but is geared towards installing the essentials that I need for a new ``Ubuntu Server`` virtual machine on any given project that I am working on.
+
+```
+sudo apt install -y git
+git clone https://github.com/Josh-XT/Setup.git
+cd Setup
+sudo chmod 755 ./ServerSetup.sh
+sudo ./ServerSetup.sh
 ```
 
 ## Mouse Bindings with ``Piper`` for ``Logitech G502``
