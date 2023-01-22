@@ -1,6 +1,6 @@
 # My PC Setup
 
-I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use.
+I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of either ``Ubuntu``, ``Pop!_OS``, ``Debian``, or ``Windows 10/11``.
 
 **Primary Operating System:** [Ubuntu 22.04](https://ubuntu.com/) with [Pop Shell](https://support.system76.com/articles/pop-shell/)  (Was ``Pop!_OS 22.04`` until a kernel update issue, I'll likely go back to it after that is resolved.)
 
