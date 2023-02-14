@@ -1,6 +1,7 @@
 #!/bin/bash
 # I use this script to handle initial package installs for Ubuntu 22.04 LTS servers
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" > "$HOME/.bash_aliases"
+sudo timedatectl set-timezone America/New_York
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
 sudo apt remove docker docker-engine docker.io containerd runc
 sudo apt update
