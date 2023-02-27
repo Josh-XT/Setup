@@ -12,7 +12,7 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 ## Hardware
 
-**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 64GB DDR5-6000, 2TB M2
+**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 64GB DDR5-6000, 2TB M2, NVIDIA GeForce RTX 3070 Ti
 
 **Secondary Workstation (Laptop)** - Upgraded HP X360, AMD Ryzen 7 4700U, 32GB DDR4-3200, 512GB M2
 
@@ -43,7 +43,7 @@ sudo ./WorkstationSetup.sh
 
 ## Ubuntu Server Setup
 
-The ``ServerSetup.sh`` is similar to the ``WorkstationSetup.sh`` script, but is geared towards installing the essentials that I need for a new ``Ubuntu Server`` virtual machine on any given project that I am working on.
+The ``ServerSetup.sh`` is similar to the ``WorkstationSetup.sh`` script, but is geared towards installing the essentials that I need for a new ``Ubuntu Server`` virtual machine on any given project that I am working on.  This includes ``Docker``, ``NodeJS``, ``Yarn``, ``PowerShell``, ``Python``, ``.NET Runtimes`` and all updates from ``apt`` and ``snap``.  It also sets the timezone on the server to ``America/New_York``.
 
 ```
 sudo apt install -y git
