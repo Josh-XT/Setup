@@ -6,13 +6,13 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 ## Operating Systems
 
-**Primary Operating System:** [Ubuntu 22.04](https://ubuntu.com/) with [Pop Shell](https://support.system76.com/articles/pop-shell/)  (Was ``Pop!_OS 22.04`` until a kernel update issue, I'll likely go back to it after that is resolved.)
+**Primary Operating System:** [Ubuntu 22.04](https://ubuntu.com/) with [Pop Shell](https://support.system76.com/articles/pop-shell/)
 
 **Virtual Machine:** [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO)
 
 ## Hardware
 
-**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 64GB DDR5-6000, 2TB M2, NVIDIA GeForce RTX 3070 Ti
+**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 128GB DDR5-6000, 2TB M2, AMD RX 7900 XTX 24GB
 
 **Secondary Workstation (Laptop)** - Upgraded HP X360, AMD Ryzen 7 4700U, 32GB DDR4-3200, 512GB M2
 
