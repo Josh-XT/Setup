@@ -12,7 +12,7 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 ## Hardware
 
-**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 128GB DDR5-6000, 2TB M2, AMD RX 7900 XTX 24GB
+**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 128GB DDR5-6000, 2TB M2, NVIDIA RTX 4090 24GB
 
 **Secondary Workstation (Laptop)** - Upgraded HP X360, AMD Ryzen 7 4700U, 32GB DDR4-3200, 512GB M2
 
