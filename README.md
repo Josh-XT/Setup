@@ -1,20 +1,34 @@
 # My PC Setup
 
-I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of either ``Ubuntu``, ``Pop!_OS``, ``Debian``, or ``Windows 10/11``.
+I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of either ``Ubuntu``, ``Pop!_OS``, or ``Windows 10/11``.
 
 _The scripts below will require modification unless you want my exact setup, which should only be the case if you are me._
 
 ## Operating Systems
 
-**Primary Operating System:** [Ubuntu 22.04](https://ubuntu.com/) with [Pop Shell](https://support.system76.com/articles/pop-shell/)
+**Primary Operating System:** [Pop!_OS 22.04](https://pop.system76.com/)
 
 **Virtual Machine:** [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO)
 
 ## Hardware
 
-**Primary Workstation (Desktop)** - Intel Core i9-12900KS, 128GB DDR5-6000, 2TB M2, NVIDIA RTX 4090 24GB
+### Primary Workstation (Desktop)
+```
+Intel Core i9-12900KS
+NVIDIA GeForce RTX 4090 24GB
+128GB DDR5
+2TB M2
+```
 
-**Secondary Workstation (Laptop)** - Upgraded HP X360, AMD Ryzen 7 4700U, 32GB DDR4-3200, 512GB M2
+### Secondary Workstation (Laptop)
+```
+Upgraded HP X360
+AMD Ryzen 7 4700U
+32GB DDR4-3200
+512GB M2
+```
+
+### Accessories
 
 **Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
 
@@ -24,7 +38,7 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 ## Workstation Setup
 
-The ``WorkstationSetup.sh`` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``WorkstationSetup.sh`` was created to work on any ``Debian`` based distrobution, such as ``Ubuntu``, ``Pop!_OS``, ``Mint``, etc.
+The ``WorkstationSetup.sh`` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``WorkstationSetup.sh`` was created to work on any ``Ubuntu`` based distrobution, such as ``Pop!_OS``, ``Mint``, etc.
 
 Open terminal and copy/paste the following:
 
@@ -38,7 +52,7 @@ sudo chmod 755 ./WorkstationSetup.sh
 _**Note: WorkstationSetup.sh should be modified before running it so that you can enter your own details in the git config and add or remove any apt packages you might want or not want.  This script is specifically set up for me to use after a fresh image.**_
 
 ```
-sudo ./WorkstationSetup.sh
+./WorkstationSetup.sh
 ```
 
 ## Ubuntu Server Setup
@@ -50,7 +64,7 @@ sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup.git
 cd Setup
 sudo chmod 755 ./ServerSetup.sh
-sudo ./ServerSetup.sh
+./ServerSetup.sh
 ```
 
 ## Windows 10 and WinSetup.ps1 Script
