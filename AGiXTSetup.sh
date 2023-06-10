@@ -12,9 +12,10 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose -y
 sudo service docker start
 sudo apt install python3-full python3-pip -y
-git clone https://github.com/Josh-XT/Auto-GPT.git
-cd 'Auto-GPT'
+git clone https://github.com/Josh-XT/AGiXT
+cd AGiXT
+pip install --upgrade pip
 pip install -r requirements.txt
-cp .env.example .env
-# Create and start redis container for Auto-GPT memory
-REDIS_PORT=$(grep -v '^#' .env | grep REDIS_PORT | cut -d '=' -f2) && docker run -d --name redis -p $REDIS_PORT:$REDIS_PORT --env-file .env redis/redis-stack-server:latest
+playwright install --with-deps
+cd streamlit
+streamlit run Main.py
