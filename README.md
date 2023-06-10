@@ -14,7 +14,7 @@ I have also documented my hardware setup and Visual Studio Code settings and ext
   - [AGiXT VM Setup](#agixt-vm-setup)
   - [Windows Setup](#windows-setup)
   - [My Setup and Settings](#my-setup-and-settings)
-    - [Workstation Setup](#workstation-setup-1)
+    - [Pop!\_OS Workstation Setup](#pop_os-workstation-setup)
     - [VSCode Setup](#vscode-setup)
       - [Settings](#settings)
       - [Extensions](#extensions)
@@ -92,7 +92,7 @@ Set-ExecutionPolicy Bypass
 
 
 ## My Setup and Settings
-### Workstation Setup
+### Pop!_OS Workstation Setup
 | Item  | What I'm Using |
 |-------------------|-------------------|
 | CPU               | Intel Core i9-12900KS   |
