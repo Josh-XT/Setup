@@ -174,9 +174,8 @@ code --install-extension yzhang.markdown-all-in-one
 code --install-extension zetta.qsharp-extensionpack
 ```
 ### My Workstation Setup
-|                   |              |
+| Item  | What I'm Using |
 |-------------------|-------------------|
-| Operating System  | Pop!_OS 21.04 |
 | CPU               | Intel Core i9-12900KS   |
 | GPU               | NVIDIA GeForce RTX 4090 24GB |
 | RAM               | 128GB DDR5 |
@@ -185,6 +184,8 @@ code --install-extension zetta.qsharp-extensionpack
 | Keyboard          | Logitech K350 |
 | Headset           | SteelSeries Arctis 7+ |
 | Monitor           | 65in Samsung 4k TV |
+| Operating System  | Pop!_OS 22.04 |
+| IDE               | Visual Studio Code |
 
 
 ### Mouse Bindings with ``Piper`` for ``Logitech G502``
