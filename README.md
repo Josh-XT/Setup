@@ -31,7 +31,7 @@ Open terminal and copy/paste the following:
 
 ```
 sudo apt install -y git
-git clone https://github.com/Josh-XT/Setup.git
+git clone https://github.com/Josh-XT/Setup
 ```
 
 _**Note: WorkstationSetup.sh should be modified before running it so that you can enter your own details in the git config and add or remove any apt packages you might want or not want.  This script is specifically set up for me to use after a fresh image.**_
@@ -46,7 +46,7 @@ The ``ServerSetup.sh`` is similar to the ``WorkstationSetup.sh`` script, but is 
 
 ```
 sudo apt install -y git
-git clone https://github.com/Josh-XT/Setup.git
+git clone https://github.com/Josh-XT/Setup
 ./Setup/ServerSetup.sh
 ```
 
@@ -54,7 +54,7 @@ git clone https://github.com/Josh-XT/Setup.git
 The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fresh Linux install. It installs all necessary packages for the operating system, installed AGiXT, then runs AGiXT. This makes setting up a new VM for AGiXT development a breeze.
 
 ```
-git clone https://github.com/Josh-XT/Setup.git
+git clone https://github.com/Josh-XT/Setup
 ./Setup/AGiXTSetup.sh
 ```
 
@@ -84,7 +84,7 @@ Running the script may take some time, it downloads and installs some larger sof
 Open PowerShell as Administrator and run the following:
 
 ```
-git clone https://github.com/Josh-XT/Setup.git
+git clone https://github.com/Josh-XT/Setup
 cd Setup
 Set-ExecutionPolicy Bypass
 .\WinSetup.ps1
