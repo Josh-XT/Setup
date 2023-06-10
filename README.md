@@ -13,11 +13,11 @@ I have also documented my hardware setup and Visual Studio Code settings and ext
   - [Ubuntu Server Setup](#ubuntu-server-setup)
   - [AGiXT VM Setup](#agixt-vm-setup)
   - [Windows Setup](#windows-setup)
-  - [Hardware, Operating System, and Settings](#hardware-operating-system-and-settings)
+  - [My Setup and Settings](#my-setup-and-settings)
+    - [Workstation Setup](#workstation-setup-1)
     - [VSCode Setup](#vscode-setup)
       - [Settings](#settings)
       - [Extensions](#extensions)
-    - [My Workstation Setup](#my-workstation-setup)
     - [Mouse Bindings with ``Piper`` for ``Logitech G502``](#mouse-bindings-with-piper-for-logitech-g502)
     - [Why Pop!\_OS or Linux in general?](#why-pop_os-or-linux-in-general)
 
@@ -91,7 +91,21 @@ Set-ExecutionPolicy Bypass
 
 
 
-## Hardware, Operating System, and Settings
+## My Setup and Settings
+### Workstation Setup
+| Item  | What I'm Using |
+|-------------------|-------------------|
+| CPU               | Intel Core i9-12900KS   |
+| GPU               | NVIDIA GeForce RTX 4090 24GB |
+| RAM               | 128GB DDR5 |
+| Storage           | 2TB M2 |
+| Mouse             | Logitech G502 |
+| Keyboard          | Logitech K350 |
+| Headset           | SteelSeries Arctis 7+ |
+| Monitor           | 65in Samsung 4k TV |
+| Operating System  | Pop!_OS 22.04 |
+| IDE               | Visual Studio Code |
+
 ### VSCode Setup
 I have settings sync enabled and sync with my GitHub account, but I've found it very helpful to other to have a list of the settings and extensions that I use. 
 
@@ -173,20 +187,6 @@ code --install-extension wayou.vscode-todo-highlight
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension zetta.qsharp-extensionpack
 ```
-### My Workstation Setup
-| Item  | What I'm Using |
-|-------------------|-------------------|
-| CPU               | Intel Core i9-12900KS   |
-| GPU               | NVIDIA GeForce RTX 4090 24GB |
-| RAM               | 128GB DDR5 |
-| Storage           | 2TB M2 |
-| Mouse             | Logitech G502 |
-| Keyboard          | Logitech K350 |
-| Headset           | SteelSeries Arctis 7+ |
-| Monitor           | 65in Samsung 4k TV |
-| Operating System  | Pop!_OS 22.04 |
-| IDE               | Visual Studio Code |
-
 
 ### Mouse Bindings with ``Piper`` for ``Logitech G502``
 | Button | Binding | Action |
