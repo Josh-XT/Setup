@@ -67,6 +67,25 @@ sudo chmod 755 ./ServerSetup.sh
 ./ServerSetup.sh
 ```
 
+## AGiXT VM Setup
+The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fresh Linux install. It installs all necessary packages for the operating system, installed AGiXT, then runs AGiXT.
+
+```
+git clone https://github.com/Josh-XT/Setup.git
+./Setup/AGiXTSetup.sh
+```
+
+To run AGiXT after it has been closed, run the following command:
+
+```
+cd AGiXT/streamlit
+streamlit run Main.py
+```
+
+Access AGiXT at http://localhost:8501 in a web browser or the back end API at http://localhost:7437 .
+
+For more information, check out the [AGiXT](https://github.com/Josh-XT/AGiXT) repository.
+
 ## Windows 10 and WinSetup.ps1 Script
 
 I have a Windows 10 VM just in case I ever need it, but it is honestly pretty rare for me to use it.  The WinSetup.ps1 script sets up a Windows 10/11 machine to be a development machine for me as if it were my desktop environment, because it used to be before I switched back to Linux.
