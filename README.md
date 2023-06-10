@@ -1,44 +1,31 @@
-# My PC Setup
-
+# Setup Automation and Documentation
 I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of either ``Ubuntu``, ``Pop!_OS``, or ``Windows 10/11``.
 
 _The scripts below will require modification unless you want my exact setup, which should only be the case if you are me._
 
-## Operating Systems
+I have also documented my hardware setup and Visual Studio Code settings and extensions below.
 
-**Primary Operating System:** [Pop!_OS 22.04](https://pop.system76.com/)
+## Table of Contents 📖
 
-**Virtual Machine:** [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO)
-
-## Hardware
-
-### Primary Workstation (Desktop)
-```
-Intel Core i9-12900KS
-NVIDIA GeForce RTX 4090 24GB
-128GB DDR5
-2TB M2
-```
-
-### Secondary Workstation (Laptop)
-```
-Upgraded HP X360
-AMD Ryzen 7 4700U
-32GB DDR4-3200
-512GB M2
-```
-
-### Accessories
-
-**Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
-
-**Keyboard** - Logitech K350
-
-**Headset** - SteelSeries Arctis 7+
+- [Setup Automation and Documentation](#setup-automation-and-documentation)
+  - [Table of Contents 📖](#table-of-contents-)
+  - [Workstation Setup](#workstation-setup)
+  - [Ubuntu Server Setup](#ubuntu-server-setup)
+  - [AGiXT VM Setup](#agixt-vm-setup)
+  - [Windows Setup](#windows-setup)
+  - [Hardware, Operating System, and Settings](#hardware-operating-system-and-settings)
+    - [VSCode Setup](#vscode-setup)
+      - [Settings](#settings)
+      - [Extensions](#extensions)
+    - [Primary Workstation (Desktop)](#primary-workstation-desktop)
+    - [Secondary Workstation (Laptop)](#secondary-workstation-laptop)
+    - [Accessories](#accessories)
+    - [Mouse Bindings with ``Piper`` for ``Logitech G502``](#mouse-bindings-with-piper-for-logitech-g502)
+    - [Why Pop!\_OS or Linux in general?](#why-pop_os-or-linux-in-general)
 
 ## Workstation Setup
 
-The ``WorkstationSetup.sh`` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``WorkstationSetup.sh`` was created to work on any ``Ubuntu`` based distrobution, such as ``Pop!_OS``, ``Mint``, etc.
+The ``WorkstationSetup.sh`` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``WorkstationSetup.sh`` was created to work on any ``Ubuntu`` based distrobution, such as ``Pop!_OS``, ``Mint``, etc.  I'm personally using ``Pop!_OS 22.04``.
 
 Open terminal and copy/paste the following:
 
@@ -64,7 +51,7 @@ git clone https://github.com/Josh-XT/Setup.git
 ```
 
 ## AGiXT VM Setup
-The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fresh Linux install. It installs all necessary packages for the operating system, installed AGiXT, then runs AGiXT.
+The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fresh Linux install. It installs all necessary packages for the operating system, installed AGiXT, then runs AGiXT. This makes setting up a new VM for AGiXT development a breeze.
 
 ```
 git clone https://github.com/Josh-XT/Setup.git
@@ -82,7 +69,7 @@ Access AGiXT at http://localhost:8501 in a web browser or the back end API at ht
 
 For more information, check out the [AGiXT](https://github.com/Josh-XT/AGiXT) repository.
 
-## Windows 10 and WinSetup.ps1 Script
+## Windows Setup
 
 I have a Windows 10 VM just in case I ever need it, but it is honestly pretty rare for me to use it.  The WinSetup.ps1 script sets up a Windows 10/11 machine to be a development machine for me as if it were my desktop environment, because it used to be before I switched back to Linux.
 
@@ -103,51 +90,18 @@ Set-ExecutionPolicy Bypass
 .\WinSetup.ps1
 ```
 
-## Mouse Bindings with ``Piper`` for ``Logitech G502``
-
-``G4`` bound to ``Backward`` button in the web browser.
-
-``G5`` bound to ``Forward`` button in the web browser.
-
-``G6/Target`` (thumb button) bound to ``CTRL + T`` to open a new web browser tab.
-
-``G7`` bound to ``CTRL + SUPER + DOWNARROW`` to navigate to the workspace down from the current one.
-
-``G8`` bound to ``CTRL + SUPER + UPARROW`` to navigate to the workspace up from the curren one.
-
-``G9`` bound to ``SUPER + B`` to open a new web browser window.
-
-## Why Pop!_OS or Linux in general?
-
-[Ubuntu](https://ubuntu.com/) and [Pop!_OS](https://pop.system76.com/) are my primary operating systems for several reasons, I'll talk about some of those below.
-
-**Auto Tiling and Multiple Workspace Workflows**
-
-The main reason I went to ``Pop!_OS`` (or ``Pop Shell`` in ``Ubuntu``) is the auto tiling feature.  The amount of time that I save in not having to move windows around and resize them is crazy.  I would encourage you to [go to their website](https://pop.system76.com/) and watch some of the short videos of the auto tiling in action.
-
-I found that multiple workspaces and binding unused mouse buttons to switching workspaces makes staying focused on a task easy, but switching to another one without losing your place even easier.  I multi-task a lot where I am working on multiple issues/projects at a time, putting anything related to whatever I am working on in one workspace separate from all of the other things I am working on keeps me extremely organized and with ``Pop!_OS`` auto tiling in each of those workspaces, I never lose a window related to what I am working on and I don't get pieces of tasks mixed up while multi-tasking due to the multiple desktops and auto tiling.  Auto tiling also encourages me to close windows when I am done with them so that they're not taking up space, further keeping me organized.
-
-**Much faster**
-
-Linux utilizes so little resources for todays hardware which makes for a mostly delay-free desktop experience.  Fast paced workloads call for fast paced operating systems.
-
-**Everything is Available (And Usually Free)**
-
-As a penny pinching developer still trying to make my way in the world, tools being free and available to me is important.  What is even more important is that many of those tools are open source, so if I ever want to really know what makes them tick or change how they behave, I can do those things.
-
-**Less Ridiculous Requirements**
-
-With Windows 11 requiring TPM and a Microsoft account now, it feels good to skip the ridiculous requirements and have an operating system that I can put on any of my devices.
-
-**Improved Security & Privacy**
-
-This should speak for itself if you know much about Linux vs Windows in general.  There are many great articles that go far in depth about this topic and how to best secure your OS, I'll leave it to those experts to explain this particular topic.
 
 
-## VSCode Setup
+
+## Hardware, Operating System, and Settings
+
+**Primary Operating System:** [Pop!_OS 22.04](https://pop.system76.com/)
+
+**Virtual Machine:** [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO)
+### VSCode Setup
 I have settings sync enabled and sync with my GitHub account, but I've found it very helpful to other to have a list of the settings and extensions that I use. 
 
-### Settings
+#### Settings
 Some settings I'd highly recommend setting up the auto save on focus change as well as the auto format on save.  Set Python Black as your default formatter for python.  Click on the settings gear in the bottom left of VSCode, then `Settings`.  You'll be able to search for the settings below and change them there.
 
 
@@ -159,7 +113,7 @@ Some settings I'd highly recommend setting up the auto save on focus change as w
 | `Editor: Format on Save`      | `Checked`         |
 | `Editor: Format On Save Mode` | `file`            |
 
-### Extensions
+#### Extensions
 Copy and paste the following into your terminal to install all of the extensions that I use.
 
 ```
@@ -225,3 +179,66 @@ code --install-extension wayou.vscode-todo-highlight
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension zetta.qsharp-extensionpack
 ```
+### Primary Workstation (Desktop)
+```
+Intel Core i9-12900KS
+NVIDIA GeForce RTX 4090 24GB
+128GB DDR5
+2TB M2
+```
+
+### Secondary Workstation (Laptop)
+```
+Upgraded HP X360
+AMD Ryzen 7 4700U
+32GB DDR4-3200
+512GB M2
+```
+
+### Accessories
+
+**Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
+
+**Keyboard** - Logitech K350
+
+**Headset** - SteelSeries Arctis 7+
+
+### Mouse Bindings with ``Piper`` for ``Logitech G502``
+
+``G4`` bound to ``Backward`` button in the web browser.
+
+``G5`` bound to ``Forward`` button in the web browser.
+
+``G6/Target`` (thumb button) bound to ``CTRL + T`` to open a new web browser tab.
+
+``G7`` bound to ``CTRL + SUPER + DOWNARROW`` to navigate to the workspace down from the current one.
+
+``G8`` bound to ``CTRL + SUPER + UPARROW`` to navigate to the workspace up from the curren one.
+
+``G9`` bound to ``SUPER + B`` to open a new web browser window.
+
+### Why Pop!_OS or Linux in general?
+
+[Ubuntu](https://ubuntu.com/) and [Pop!_OS](https://pop.system76.com/) are my primary operating systems for several reasons, I'll talk about some of those below.
+
+**Auto Tiling and Multiple Workspace Workflows**
+
+The main reason I went to ``Pop!_OS`` (or ``Pop Shell`` in ``Ubuntu``) is the auto tiling feature.  The amount of time that I save in not having to move windows around and resize them is crazy.  I would encourage you to [go to their website](https://pop.system76.com/) and watch some of the short videos of the auto tiling in action.
+
+I found that multiple workspaces and binding unused mouse buttons to switching workspaces makes staying focused on a task easy, but switching to another one without losing your place even easier.  I multi-task a lot where I am working on multiple issues/projects at a time, putting anything related to whatever I am working on in one workspace separate from all of the other things I am working on keeps me extremely organized and with ``Pop!_OS`` auto tiling in each of those workspaces, I never lose a window related to what I am working on and I don't get pieces of tasks mixed up while multi-tasking due to the multiple desktops and auto tiling.  Auto tiling also encourages me to close windows when I am done with them so that they're not taking up space, further keeping me organized.
+
+**Much faster**
+
+Linux utilizes so little resources for todays hardware which makes for a mostly delay-free desktop experience.  Fast paced workloads call for fast paced operating systems.
+
+**Everything is Available (And Usually Free)**
+
+As a penny pinching developer still trying to make my way in the world, tools being free and available to me is important.  What is even more important is that many of those tools are open source, so if I ever want to really know what makes them tick or change how they behave, I can do those things.
+
+**Less Ridiculous Requirements**
+
+With Windows 11 requiring TPM and a Microsoft account now, it feels good to skip the ridiculous requirements and have an operating system that I can put on any of my devices.
+
+**Improved Security & Privacy**
+
+This should speak for itself if you know much about Linux vs Windows in general.  There are many great articles that go far in depth about this topic and how to best secure your OS, I'll leave it to those experts to explain this particular topic.
