@@ -45,14 +45,12 @@ Open terminal and copy/paste the following:
 ```
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup.git
-cd Setup
-sudo chmod 755 ./WorkstationSetup.sh
 ```
 
 _**Note: WorkstationSetup.sh should be modified before running it so that you can enter your own details in the git config and add or remove any apt packages you might want or not want.  This script is specifically set up for me to use after a fresh image.**_
 
 ```
-./WorkstationSetup.sh
+./Setup/WorkstationSetup.sh
 ```
 
 ## Ubuntu Server Setup
@@ -62,9 +60,7 @@ The ``ServerSetup.sh`` is similar to the ``WorkstationSetup.sh`` script, but is 
 ```
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup.git
-cd Setup
-sudo chmod 755 ./ServerSetup.sh
-./ServerSetup.sh
+./Setup/ServerSetup.sh
 ```
 
 ## AGiXT VM Setup
@@ -101,6 +97,8 @@ Running the script may take some time, it downloads and installs some larger sof
 Open PowerShell as Administrator and run the following:
 
 ```
+git clone https://github.com/Josh-XT/Setup.git
+cd Setup
 Set-ExecutionPolicy Bypass
 .\WinSetup.ps1
 ```
