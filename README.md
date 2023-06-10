@@ -9,19 +9,19 @@ I have also documented my hardware setup and Visual Studio Code settings and ext
 
 - [Setup Automation and Documentation](#setup-automation-and-documentation)
   - [Table of Contents 📖](#table-of-contents-)
-  - [Workstation Setup](#workstation-setup)
+  - [Pop!\_OS Workstation Setup](#pop_os-workstation-setup)
   - [Ubuntu Server Setup](#ubuntu-server-setup)
   - [AGiXT VM Setup](#agixt-vm-setup)
   - [Windows Setup](#windows-setup)
   - [My Setup and Settings](#my-setup-and-settings)
-    - [Pop!\_OS Workstation Setup](#pop_os-workstation-setup)
+    - [Workstation Setup](#workstation-setup)
     - [VSCode Setup](#vscode-setup)
       - [Settings](#settings)
       - [Extensions](#extensions)
     - [Mouse Bindings with ``Piper`` for ``Logitech G502``](#mouse-bindings-with-piper-for-logitech-g502)
     - [Why Pop!\_OS or Linux in general?](#why-pop_os-or-linux-in-general)
 
-## Workstation Setup
+## Pop!_OS Workstation Setup
 
 The ``WorkstationSetup.sh`` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  ``WorkstationSetup.sh`` was created to work on any ``Ubuntu`` based distrobution, such as ``Pop!_OS``, ``Mint``, etc.  I'm personally using ``Pop!_OS 22.04``.
 
@@ -92,7 +92,7 @@ Set-ExecutionPolicy Bypass
 
 
 ## My Setup and Settings
-### Pop!_OS Workstation Setup
+### Workstation Setup
 | Item  | What I'm Using |
 |-------------------|-------------------|
 | CPU               | Intel Core i9-12900KS   |
