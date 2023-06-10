@@ -17,9 +17,7 @@ I have also documented my hardware setup and Visual Studio Code settings and ext
     - [VSCode Setup](#vscode-setup)
       - [Settings](#settings)
       - [Extensions](#extensions)
-    - [Primary Workstation (Desktop)](#primary-workstation-desktop)
-    - [Secondary Workstation (Laptop)](#secondary-workstation-laptop)
-    - [Accessories](#accessories)
+    - [My Workstation Setup](#my-workstation-setup)
     - [Mouse Bindings with ``Piper`` for ``Logitech G502``](#mouse-bindings-with-piper-for-logitech-g502)
     - [Why Pop!\_OS or Linux in general?](#why-pop_os-or-linux-in-general)
 
@@ -94,10 +92,6 @@ Set-ExecutionPolicy Bypass
 
 
 ## Hardware, Operating System, and Settings
-
-**Primary Operating System:** [Pop!_OS 22.04](https://pop.system76.com/)
-
-**Virtual Machine:** [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO)
 ### VSCode Setup
 I have settings sync enabled and sync with my GitHub account, but I've found it very helpful to other to have a list of the settings and extensions that I use. 
 
@@ -179,43 +173,29 @@ code --install-extension wayou.vscode-todo-highlight
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension zetta.qsharp-extensionpack
 ```
-### Primary Workstation (Desktop)
-```
-Intel Core i9-12900KS
-NVIDIA GeForce RTX 4090 24GB
-128GB DDR5
-2TB M2
-```
+### My Workstation Setup
+|                   |              |
+|-------------------|-------------------|
+| Operating System  | Pop!_OS 21.04 |
+| CPU               | Intel Core i9-12900KS   |
+| GPU               | NVIDIA GeForce RTX 4090 24GB |
+| RAM               | 128GB DDR5 |
+| Storage           | 2TB M2 |
+| Mouse             | Logitech G502 |
+| Keyboard          | Logitech K350 |
+| Headset           | SteelSeries Arctis 7+ |
+| Monitor           | 65in Samsung 4k TV |
 
-### Secondary Workstation (Laptop)
-```
-Upgraded HP X360
-AMD Ryzen 7 4700U
-32GB DDR4-3200
-512GB M2
-```
-
-### Accessories
-
-**Mouse** - Logitech G502 ([Button Bindings Below](https://github.com/Josh-XT/Setup#mouse-bindings-with-piper-for-logitech-g502))
-
-**Keyboard** - Logitech K350
-
-**Headset** - SteelSeries Arctis 7+
 
 ### Mouse Bindings with ``Piper`` for ``Logitech G502``
-
-``G4`` bound to ``Backward`` button in the web browser.
-
-``G5`` bound to ``Forward`` button in the web browser.
-
-``G6/Target`` (thumb button) bound to ``CTRL + T`` to open a new web browser tab.
-
-``G7`` bound to ``CTRL + SUPER + DOWNARROW`` to navigate to the workspace down from the current one.
-
-``G8`` bound to ``CTRL + SUPER + UPARROW`` to navigate to the workspace up from the curren one.
-
-``G9`` bound to ``SUPER + B`` to open a new web browser window.
+| Button | Binding | Action |
+|--------|--------|------|
+| G4 | Backward | ``Backward`` button in the web browser. |
+| G5 | Forward | ``Forward`` button in the web browser. |
+| G6/Target | CTRL + T | Open a new web browser tab. |
+| G7 | CTRL + SUPER + DOWNARROW | Navigate to the workspace down from the current one. |
+| G8 | CTRL + SUPER + UPARROW | Navigate to the workspace up from the current one. |
+| G9 | SUPER + B | Open a new web browser window. |
 
 ### Why Pop!_OS or Linux in general?
 
