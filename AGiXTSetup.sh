@@ -14,8 +14,4 @@ sudo service docker start
 sudo apt install python3-full python3-pip -y
 git clone https://github.com/Josh-XT/AGiXT
 cd AGiXT
-pip install --upgrade pip
-pip install -r requirements.txt
-playwright install --with-deps
-cd streamlit
-streamlit run Main.py
+./AGiXT.sh
