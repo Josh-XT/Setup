@@ -59,8 +59,8 @@ git clone https://github.com/Josh-XT/Setup
 To run AGiXT after it has been closed, run the following command:
 
 ```
-cd AGiXT/streamlit
-streamlit run Main.py
+cd AGiXT
+./AGiXT.sh
 ```
 
 Access AGiXT at http://localhost:8501 in a web browser or the back end API at http://localhost:7437 .
