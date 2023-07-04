@@ -12,6 +12,8 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose -y
 sudo service docker start
 sudo apt install python3-full python3-pip -y
-git clone https://github.com/Josh-XT/AGiXT
+mkdir AGiXT
 cd AGiXT
-./AGiXT.sh
+wget https://raw.githubusercontent.com/Josh-XT/AGiXT/main/docker-compose.yml
+wget https://raw.githubusercontent.com/Josh-XT/AGiXT/main/.env.example
+sudo docker-compose up -d
