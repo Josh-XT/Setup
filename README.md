@@ -56,13 +56,6 @@ git clone https://github.com/Josh-XT/Setup
 ./Setup/AGiXTSetup.sh
 ```
 
-To run AGiXT after it has been closed, run the following command:
-
-```
-cd AGiXT
-./AGiXT.sh
-```
-
 Access AGiXT at http://localhost:8501 in a web browser or the back end API at http://localhost:7437 .
 
 For more information, check out the [AGiXT](https://github.com/Josh-XT/AGiXT) repository.
