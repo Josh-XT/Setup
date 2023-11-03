@@ -15,7 +15,7 @@ sudo service docker start
 curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
 sudo apt install -y nodejs
 sudo npm install --global yarn
-sudo npm install -g npm@9.2.0
+sudo npm install -g npm
 sudo snap install powershell --classic
 sudo apt install -y apt-transport-https dotnet-sdk-7.0 aspnetcore-runtime-7.0
 sudo apt install -y python3 python3-pip

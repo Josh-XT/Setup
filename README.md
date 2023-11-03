@@ -1,6 +1,7 @@
+# Setup Automation and Documentation
+
 [![GitHub](https://img.shields.io/badge/GitHub-Sponsor%20Josh%20XT-blue?logo=github&style=plastic)](https://github.com/sponsors/Josh-XT) [![PayPal](https://img.shields.io/badge/PayPal-Sponsor%20Josh%20XT-blue.svg?logo=paypal&style=plastic)](https://paypal.me/joshxt) [![Ko-Fi](https://img.shields.io/badge/Kofi-Sponsor%20Josh%20XT-blue.svg?logo=kofi&style=plastic)](https://ko-fi.com/joshxt)
 
-# Setup Automation and Documentation
 I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of either ``Ubuntu``, ``Pop!_OS``, or ``Windows 10/11``.
 
 _The scripts below will require modification unless you want my exact setup, which should only be the case if you are me._
@@ -29,14 +30,14 @@ The ``WorkstationSetup.sh`` script handles all of my application installs and gi
 
 Open terminal and copy/paste the following:
 
-```
+```bash
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup
 ```
 
 _**Note: WorkstationSetup.sh should be modified before running it so that you can enter your own details in the git config and add or remove any apt packages you might want or not want.  This script is specifically set up for me to use after a fresh image.**_
 
-```
+```bash
 ./Setup/WorkstationSetup.sh
 ```
 
@@ -44,16 +45,17 @@ _**Note: WorkstationSetup.sh should be modified before running it so that you ca
 
 The ``ServerSetup.sh`` is similar to the ``WorkstationSetup.sh`` script, but is geared towards installing the essentials that I need for a new ``Ubuntu Server`` virtual machine on any given project that I am working on.  This includes ``Docker``, ``NodeJS``, ``Yarn``, ``PowerShell``, ``Python``, ``.NET Runtimes`` and all updates from ``apt`` and ``snap``.  It also sets the timezone on the server to ``America/New_York``.
 
-```
+```bash
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup
 ./Setup/ServerSetup.sh
 ```
 
 ## AGiXT VM Setup
+
 The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fresh Linux install. It installs all necessary packages for the operating system, installed AGiXT, then runs AGiXT. This makes setting up a new VM for AGiXT development a breeze.
 
-```
+```bash
 git clone https://github.com/Josh-XT/Setup
 ./Setup/AGiXTSetup.sh
 ```
@@ -76,37 +78,37 @@ Running the script may take some time, it downloads and installs some larger sof
 
 Open PowerShell as Administrator and run the following:
 
-```
+```bash
 git clone https://github.com/Josh-XT/Setup
 cd Setup
 Set-ExecutionPolicy Bypass
 .\WinSetup.ps1
 ```
 
-
-
-
 ## My Setup and Settings
+
 ### Workstation Setup
-| Item  | What I'm Using |
-|-------------------|-------------------|
-| CPU               | Intel Core i9-12900KS   |
-| GPU               | NVIDIA GeForce RTX 4090 24GB |
-| RAM               | 128GB DDR5 |
-| Storage           | 2TB M2 |
-| Mouse             | Logitech G502 |
-| Keyboard          | Logitech K350 |
-| Headset           | SteelSeries Arctis 7+ |
-| Monitor           | 65in Samsung 4k TV |
-| Operating System  | Pop!_OS 22.04 |
-| IDE               | Visual Studio Code |
+
+| Item  | Desktop | Laptop |
+|-------------------|-------------------|-------------------|
+| Model             | Custom Built | HP Victus 16-s0077nr |
+| CPU               | Intel Core i9-12900KS   | AMD Ryzen 7 7840HS |
+| GPU               | NVIDIA GeForce RTX 4090 24GB | NVIDIA GeForce RTX 4050 6GB |
+| RAM               | 128GB DDR5 | 64GB DDR5 |
+| Storage           | 2TB M2 | 1TB M2 |
+| Operating System  | Pop!_OS 22.04 | Ubuntu 23.10 |
+| IDE               | Visual Studio Code | Visual Studio Code |
+| Mouse             | Logitech G502 | Logitech G502 |
+| Keyboard          | Logitech K350 | -- |
+| Monitor           | 65in Samsung 4k TV | 16.1" 144Hz Laptop Display |
 
 ### VSCode Setup
-I have settings sync enabled and sync with my GitHub account, but I've found it very helpful to other to have a list of the settings and extensions that I use. 
+
+I have settings sync enabled and sync with my GitHub account, but I've found it very helpful to other to have a list of the settings and extensions that I use.
 
 #### Settings
-Some settings I'd highly recommend setting up the auto save on focus change as well as the auto format on save.  Set Python Black as your default formatter for python.  Click on the settings gear in the bottom left of VSCode, then `Settings`.  You'll be able to search for the settings below and change them there.
 
+Some settings I'd highly recommend setting up the auto save on focus change as well as the auto format on save.  Set Python Black as your default formatter for python.  Click on the settings gear in the bottom left of VSCode, then `Settings`.  You'll be able to search for the settings below and change them there.
 
 | Setting                       | Value             |
 |-------------------------------|-------------------|
@@ -117,9 +119,10 @@ Some settings I'd highly recommend setting up the auto save on focus change as w
 | `Editor: Format On Save Mode` | `file`            |
 
 #### Extensions
+
 Copy and paste the following into your terminal to install all of the extensions that I use.
 
-```
+```bash
 code --install-extension AkashGutha.qiksit-snippets
 code --install-extension amazonwebservices.aws-toolkit-vscode
 code --install-extension apollographql.vscode-apollo
@@ -184,6 +187,7 @@ code --install-extension zetta.qsharp-extensionpack
 ```
 
 ### Mouse Bindings with ``Piper`` for ``Logitech G502``
+
 | Button | Binding | Action |
 |--------|--------|------|
 | G4 | Backward | ``Backward`` button in the web browser. |
