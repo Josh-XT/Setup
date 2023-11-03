@@ -66,7 +66,7 @@ sudo apt install -y snapd
 sudo snap install dotnet-sdk --classic --channel=7.0
 sudo snap alias dotnet-sdk.dotnet dotnet
 sudo snap install powershell --classic
-sudo snap install -y discord
+sudo snap install discord
 sudo snap install onlyoffice-desktopeditors
 sudo snap install --edge spotify
 sudo snap install slack
