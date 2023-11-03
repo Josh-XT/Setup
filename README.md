@@ -23,6 +23,11 @@ I have also documented my hardware setup and Visual Studio Code settings and ext
       - [Extensions](#extensions)
     - [Mouse Bindings with ``Piper`` for ``Logitech G502``](#mouse-bindings-with-piper-for-logitech-g502)
     - [Why Pop!\_OS or Linux in general?](#why-pop_os-or-linux-in-general)
+      - [Auto Tiling and Multiple Workspace Workflows](#auto-tiling-and-multiple-workspace-workflows)
+      - [Much faster](#much-faster)
+      - [Everything is Available (And Usually Free)](#everything-is-available-and-usually-free)
+      - [Less Ridiculous Requirements](#less-ridiculous-requirements)
+      - [Improved Security \& Privacy](#improved-security--privacy)
 
 ## Pop!_OS Workstation Setup
 
@@ -59,8 +64,6 @@ The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fre
 git clone https://github.com/Josh-XT/Setup
 ./Setup/AGiXTSetup.sh
 ```
-
-Access AGiXT at http://localhost:8501 in a web browser or the back end API at http://localhost:7437 .
 
 For more information, check out the [AGiXT](https://github.com/Josh-XT/AGiXT) repository.
 
@@ -201,24 +204,24 @@ code --install-extension zetta.qsharp-extensionpack
 
 [Ubuntu](https://ubuntu.com/) and [Pop!_OS](https://pop.system76.com/) are my primary operating systems for several reasons, I'll talk about some of those below.
 
-**Auto Tiling and Multiple Workspace Workflows**
+#### Auto Tiling and Multiple Workspace Workflows
 
 The main reason I went to ``Pop!_OS`` (or ``Pop Shell`` in ``Ubuntu``) is the auto tiling feature.  The amount of time that I save in not having to move windows around and resize them is crazy.  I would encourage you to [go to their website](https://pop.system76.com/) and watch some of the short videos of the auto tiling in action.
 
 I found that multiple workspaces and binding unused mouse buttons to switching workspaces makes staying focused on a task easy, but switching to another one without losing your place even easier.  I multi-task a lot where I am working on multiple issues/projects at a time, putting anything related to whatever I am working on in one workspace separate from all of the other things I am working on keeps me extremely organized and with ``Pop!_OS`` auto tiling in each of those workspaces, I never lose a window related to what I am working on and I don't get pieces of tasks mixed up while multi-tasking due to the multiple desktops and auto tiling.  Auto tiling also encourages me to close windows when I am done with them so that they're not taking up space, further keeping me organized.
 
-**Much faster**
+#### Much faster
 
 Linux utilizes so little resources for todays hardware which makes for a mostly delay-free desktop experience.  Fast paced workloads call for fast paced operating systems.
 
-**Everything is Available (And Usually Free)**
+#### Everything is Available (And Usually Free)
 
 As a penny pinching developer still trying to make my way in the world, tools being free and available to me is important.  What is even more important is that many of those tools are open source, so if I ever want to really know what makes them tick or change how they behave, I can do those things.
 
-**Less Ridiculous Requirements**
+#### Less Ridiculous Requirements
 
 With Windows 11 requiring TPM and a Microsoft account now, it feels good to skip the ridiculous requirements and have an operating system that I can put on any of my devices.
 
-**Improved Security & Privacy**
+#### Improved Security & Privacy
 
 This should speak for itself if you know much about Linux vs Windows in general.  There are many great articles that go far in depth about this topic and how to best secure your OS, I'll leave it to those experts to explain this particular topic.
