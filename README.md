@@ -94,16 +94,16 @@ Set-ExecutionPolicy Bypass
 
 | Item  | Desktop | Laptop |
 |-------------------|-------------------|-------------------|
-| Model             | Custom Built | HP Victus 16-s0077nr |
-| CPU               | Intel Core i9-12900KS   | AMD Ryzen 7 7840HS |
-| GPU               | NVIDIA GeForce RTX 4090 24GB | NVIDIA GeForce RTX 4050 6GB |
-| RAM               | 128GB DDR5 | 64GB DDR5 |
-| Storage           | 2TB M2 | 1TB M2 |
-| Operating System  | Pop!_OS 22.04 | -- |
-| IDE               | Visual Studio Code | -- |
-| Mouse             | Logitech G502 | -- |
-| Keyboard          | Logitech K350 | -- |
-| Monitor           | 65in Samsung 4k TV | 16.1" 144Hz Laptop Display |
+| **Model**             | Custom Built | [HP Victus 16-s0077nr](https://www.microcenter.com/product/669580/hp-victus-16-s0077nr-161-gaming-laptop-computer-mica-silver) |
+| **Operating System**  | [Pop!_OS 22.04](https://pop.system76.com/) | [Pop!_OS 22.04](https://pop.system76.com/) |
+| **IDE**               | [Visual Studio Code](https://code.visualstudio.com/) | [Visual Studio Code](https://code.visualstudio.com/) |
+| **CPU**               | [Intel Core i9-12900KS](https://ark.intel.com/content/www/us/en/ark/products/225916/intel-core-i912900ks-processor-30m-cache-up-to-5-50-ghz.html)   | [AMD Ryzen 7 7840HS](https://www.amd.com/en/products/apu/amd-ryzen-7-7840hs) |
+| **GPU**               | [NVIDIA GeForce RTX 4090 24GB](https://www.asus.com/us/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4090-o24g-gaming/) | [NVIDIA GeForce RTX 4050 6GB](https://www.microcenter.com/product/669580/hp-victus-16-s0077nr-161-gaming-laptop-computer-mica-silver) |
+| **RAM**               | [128GB DDR5-5200](https://www.gskill.com/product/165/377/1649665420/F5-5200J3636D32GX2-RS5W-F5-5200J3636D32GA2-RS5W) | [64GB DDR5-5600](https://www.microcenter.com/product/661345/crucial-64gb-(2-x-32gb)-ddr5-5600-pc5-44800-cl46-dual-channel-laptop-memory-kit-ct2k32g56c46s5-black) |
+| **Storage**           | 2TB M2 | 1TB M2 |
+| **Mouse**             | [Logitech G502](https://www.logitechg.com/en-us/products/gaming-mice/g502-hero-gaming-mouse.910-005469.html) | [Logitech G502](https://www.logitechg.com/en-us/products/gaming-mice/g502-hero-gaming-mouse.910-005469.html) |
+| **Keyboard**          | [Logitech K350](https://www.logitech.com/en-us/products/keyboards/k350-wave-ergonomic.920-001996.html) | [Logitech K350](https://www.logitech.com/en-us/products/keyboards/k350-wave-ergonomic.920-001996.html) |
+| **Monitor**           | 65in Samsung 4k TV | 16.1" 144Hz Laptop Display |
 
 ### VSCode Setup
 
