@@ -99,9 +99,9 @@ Set-ExecutionPolicy Bypass
 | GPU               | NVIDIA GeForce RTX 4090 24GB | NVIDIA GeForce RTX 4050 6GB |
 | RAM               | 128GB DDR5 | 64GB DDR5 |
 | Storage           | 2TB M2 | 1TB M2 |
-| Operating System  | Pop!_OS 22.04 | Ubuntu 23.10 |
-| IDE               | Visual Studio Code | Visual Studio Code |
-| Mouse             | Logitech G502 | Logitech G502 |
+| Operating System  | Pop!_OS 22.04 | -- |
+| IDE               | Visual Studio Code | -- |
+| Mouse             | Logitech G502 | -- |
 | Keyboard          | Logitech K350 | -- |
 | Monitor           | 65in Samsung 4k TV | 16.1" 144Hz Laptop Display |
 
@@ -123,70 +123,11 @@ Some settings I'd highly recommend setting up the auto save on focus change as w
 
 #### Extensions
 
-Copy and paste the following into your terminal to install all of the extensions that I use.
+To install the same VSCode extensions that I use, run the `CodeExtensions.sh` script in the `Setup` directory.
 
 ```bash
-code --install-extension AkashGutha.qiksit-snippets
-code --install-extension amazonwebservices.aws-toolkit-vscode
-code --install-extension apollographql.vscode-apollo
-code --install-extension AykutSarac.jsoncrack-vscode
-code --install-extension christian-kohler.npm-intellisense
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension eamodio.gitlens
-code --install-extension elypia.magick-image-reader
-code --install-extension esbenp.prettier-vscode
-code --install-extension firefox-devtools.vscode-firefox-debug
-code --install-extension gamunu.vscode-yarn
-code --install-extension GitHub.codespaces
-code --install-extension GitHub.copilot-chat
-code --install-extension GitHub.copilot-labs
-code --install-extension GitHub.copilot-nightly
-code --install-extension github.vscode-github-actions
-code --install-extension GitLab.gitlab-workflow
-code --install-extension GrapeCity.gc-excelviewer
-code --install-extension GraphQL.vscode-graphql
-code --install-extension GraphQL.vscode-graphql-execution
-code --install-extension GraphQL.vscode-graphql-syntax
-code --install-extension Gruntfuggly.todo-tree
-code --install-extension Ionide.Ionide-fsharp
-code --install-extension leo-labs.dotnet
-code --install-extension mikestead.dotenv
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-dotnettools.csharp
-code --install-extension ms-dotnettools.dotnet-interactive-vscode
-code --install-extension ms-dotnettools.vscode-dotnet-runtime
-code --install-extension ms-mssql.data-workspace-vscode
-code --install-extension ms-mssql.mssql
-code --install-extension ms-mssql.sql-bindings-vscode
-code --install-extension ms-mssql.sql-database-projects-vscode
-code --install-extension ms-python.black-formatter
-code --install-extension ms-python.isort
-code --install-extension ms-python.python
-code --install-extension ms-python.vscode-pylance
-code --install-extension ms-toolsai.jupyter
-code --install-extension ms-toolsai.jupyter-keymap
-code --install-extension ms-toolsai.jupyter-renderers
-code --install-extension ms-toolsai.vscode-jupyter-cell-tags
-code --install-extension ms-toolsai.vscode-jupyter-slideshow
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension ms-vscode-remote.remote-ssh
-code --install-extension ms-vscode-remote.remote-ssh-edit
-code --install-extension ms-vscode-remote.remote-wsl
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-code --install-extension ms-vscode.azurecli
-code --install-extension ms-vscode.powershell
-code --install-extension ms-vscode.remote-explorer
-code --install-extension ms-vscode.remote-server
-code --install-extension ms-vscode.vscode-typescript-next
-code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension quantum.quantum-devkit-vscode
-code --install-extension redhat.vscode-yaml
-code --install-extension ShahilKumar.docxreader
-code --install-extension stylelint.vscode-stylelint
-code --install-extension tomoki1207.pdf
-code --install-extension wayou.vscode-todo-highlight
-code --install-extension yzhang.markdown-all-in-one
-code --install-extension zetta.qsharp-extensionpack
+git clone https://github.com/Josh-XT/Setup
+./Setup/CodeExtensions.sh
 ```
 
 ### Mouse Bindings with ``Piper`` for ``Logitech G502``
