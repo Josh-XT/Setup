@@ -36,6 +36,7 @@ The `WorkstationSetup.sh` script handles all of my application installs and git 
 Open terminal and copy/paste the following:
 
 ```bash
+sudo apt update
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup
 ```
@@ -51,6 +52,7 @@ _**Note: WorkstationSetup.sh should be modified before running it so that you ca
 The `ServerSetup.sh` is similar to the `WorkstationSetup.sh` script, but is geared towards installing the essentials that I need for a new [Ubuntu Server](https://ubuntu.com/download/server) virtual machine on any given project that I am working on.  This includes `Docker`, `NodeJS`, `Yarn`, `PowerShell`, `Python`, `.NET Runtimes` and all updates from `apt` and `snap`.  It also sets the timezone on the server to `America/New_York`.
 
 ```bash
+sudo apt update
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup
 ./Setup/ServerSetup.sh
@@ -61,6 +63,8 @@ git clone https://github.com/Josh-XT/Setup
 The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fresh Linux install. It installs all necessary packages for the operating system, installed AGiXT, then runs AGiXT. This makes setting up a new VM for AGiXT development a breeze.
 
 ```bash
+sudo apt update
+sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup
 ./Setup/AGiXTSetup.sh
 ```
