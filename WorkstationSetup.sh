@@ -23,11 +23,8 @@ rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 # CUDA
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
 sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-wget https://developer.download.nvidia.com/compute/cuda/12.3.0/local_installers/cuda-repo-ubuntu2204-12-3-local_12.3.0-545.23.06-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu2204-12-3-local_12.3.0-545.23.06-1_amd64.deb
-sudo cp /var/cuda-repo-ubuntu2204-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
-sudo apt-get -y install cuda-toolkit-12-3
+sudo apt-get -y install cuda-toolkit
 sudo apt-get install -y nvidia-kernel-open-545
 sudo apt-get install -y cuda-drivers-545
 # Signal
@@ -63,7 +60,7 @@ sudo apt install -y piper
 sudo apt install -y software-properties-common
 # Snap
 sudo apt install -y snapd
-sudo snap install dotnet-sdk --classic --channel=7.0
+sudo snap install dotnet-sdk --classic --channel=8.0
 sudo snap alias dotnet-sdk.dotnet dotnet
 sudo snap install powershell --classic
 sudo snap install discord

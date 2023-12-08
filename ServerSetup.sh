@@ -17,7 +17,7 @@ sudo apt install -y nodejs
 sudo npm install --global yarn
 sudo npm install -g npm
 sudo snap install powershell --classic
-sudo apt install -y apt-transport-https dotnet-sdk-7.0 aspnetcore-runtime-7.0
+sudo apt install -y apt-transport-https dotnet-sdk-8.0 aspnetcore-runtime-8.0
 sudo apt install -y python3 python3-pip
 pip install --upgrade pip
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
