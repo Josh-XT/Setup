@@ -1,5 +1,4 @@
 #!/bin/bash
-# I use this script to handle initial package installs for Ubuntu 22.04 LTS servers
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" >> ~/.bashrc
 sudo timedatectl set-timezone America/New_York
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
@@ -12,13 +11,4 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose -y
 sudo service docker start
-curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
-sudo apt install -y nodejs
-sudo npm install --global yarn
-sudo npm install -g npm
-sudo snap install powershell --classic
-sudo apt install -y apt-transport-https dotnet-sdk-8.0 aspnetcore-runtime-8.0
-sudo apt install -y python3 python3-pip
-pip install --upgrade pip
-sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-sudo snap refresh
+sudo apt install python3-full python3-pip -y
