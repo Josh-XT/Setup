@@ -13,15 +13,14 @@ if ($myWindowsPrincipal.IsInRole($adminRole)) {
     exit
 }
 
-winget install -e --id Adobe.Acrobat.Reader.64-bit
+winget install -e --id Python.Python.3.10
+winget install -e --id Git.Git
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Google.AndroidStudio
-winget install -e --id Python.Python.3.10
 winget install -e --id OpenJS.NodeJS.LTS
 winget install -e --id Oracle.JDK.19
 winget install -e --id Oracle.JavaRuntimeEnvironment
 winget install -e --id Microsoft.DotNet.SDK.Preview
-winget install -e --id Git.Git
 winget install -e --id Docker.DockerDesktop --location "C:\WINGET\Development\Docker"
 winget install -e --id Microsoft.PowerToys
 winget install -e --id Valve.Steam
@@ -42,6 +41,13 @@ wsl --unregister docker-desktop-data
 wsl --import docker-desktop-data "C:\WINGET\Development\Docker\WSL_Data" docker-desktop-data.tar --version 2
 Remove-Item -LiteralPath "C:\temp\docker-desktop-data.tar"
 
+# Git Configuration
+git config --global submodule.recurse true
+git config --global user.email "josh@devxt.com"
+git config --global user.name "Josh XT"
+Set-Content -Path ~/.gitmessage -Value "Updates"
+git config --global commit.template ~/.gitmessage
+
 # VS Configuration
 dotnet tool install --global dotnet-ef
 
@@ -51,6 +57,6 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 Import-Module PSWindowsUpdate -Force
 Get-WindowsUpdate -Install -AcceptAll -IgnoreReboot
 
-Write-Host "Setup complete."
+Write-Host "Setup complete. Run the GetRepos.ipynb notebook to clone all repos."
 
 return 0
