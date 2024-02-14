@@ -42,6 +42,7 @@ pip install --upgrade pip
 sudo pip install jupyter && pip install jupyter
 sudo pip install matplotlib && pip install matplotlib
 # APT Packages
+sudo apt install -y curl
 sudo apt install -y libpq-dev
 sudo apt install -y docker-compose
 sudo apt install -y evolution 
@@ -50,6 +51,7 @@ sudo apt install -y gnome-boxes
 sudo apt install -y apt-transport-https
 sudo apt install -y piper
 sudo apt install -y software-properties-common
+sudo apt install -y ocl-icd-opencl-dev opencl-headers clinfo libclblast-dev libopenblas-dev cmake gcc g++
 # Snap
 sudo apt install -y snapd
 sudo snap install -y code --classic
@@ -64,5 +66,10 @@ sudo snap install slack
 sudo ubuntu-drivers install nvidia-driver-545
 sudo apt install -y nvidia-utils-545
 sudo apt install -y nvidia-cuda-toolkit
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+sudo apt-get install -y nvidia-container-toolkit
 # Cleanup
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh
