@@ -48,11 +48,11 @@ sudo apt install -y evolution
 sudo apt install -y evolution-ews 
 sudo apt install -y gnome-boxes 
 sudo apt install -y apt-transport-https
-sudo apt install -y code
 sudo apt install -y piper
 sudo apt install -y software-properties-common
 # Snap
 sudo apt install -y snapd
+sudo snap install -y code --classic
 sudo snap install dotnet-sdk --classic --channel=8.0
 sudo snap alias dotnet-sdk.dotnet dotnet
 sudo snap install powershell --classic
