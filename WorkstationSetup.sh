@@ -60,5 +60,9 @@ sudo snap install discord
 sudo snap install onlyoffice-desktopeditors
 sudo snap install --edge spotify
 sudo snap install slack
+# Cuda things
+sudo ubuntu-drivers install nvidia-driver-545
+sudo apt install -y nvidia-utils-545
+sudo apt install -y nvidia-cuda-toolkit
 # Cleanup
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh
