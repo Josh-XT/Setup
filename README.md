@@ -100,14 +100,14 @@ My operating system for my Desktop and Laptop is [Pop!_OS 22.04](https://pop.sys
 
 | Item  | Desktop | Laptop |
 |-------------------|-------------------|-------------------|
-| **Model**             | Custom Built | [HP Victus 16-s0077nr](https://www.microcenter.com/product/669580/hp-victus-16-s0077nr-161-gaming-laptop-computer-mica-silver) |
-| **CPU**               | [Intel Core i9-12900KS](https://ark.intel.com/content/www/us/en/ark/products/225916/intel-core-i912900ks-processor-30m-cache-up-to-5-50-ghz.html)   | [AMD Ryzen 7 7840HS](https://www.amd.com/en/products/apu/amd-ryzen-7-7840hs) |
-| **GPU**               | [NVIDIA GeForce RTX 4090 24GB](https://www.asus.com/us/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4090-o24g-gaming/) | NVIDIA GeForce RTX 4050 6GB |
+| **Model**             | Custom Built | [Alienware x17 R2](https://www.microcenter.com/product/647646/dell-alienware-x17-r2-173-gaming-laptop-computer-white) |
+| **CPU**               | [Intel Core i9-12900KS](https://ark.intel.com/content/www/us/en/ark/products/225916/intel-core-i912900ks-processor-30m-cache-up-to-5-50-ghz.html)   | Intel Core i9-12900HK |
+| **GPU**               | [NVIDIA GeForce RTX 4090 24GB](https://www.asus.com/us/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4090-o24g-gaming/) | NVIDIA GeForce RTX 3080 Ti 16GB |
 | **RAM**               | [128GB DDR5-5200](https://www.gskill.com/product/165/377/1649665420/F5-5200J3636D32GX2-RS5W-F5-5200J3636D32GA2-RS5W) | [64GB DDR5-5600](https://www.microcenter.com/product/661345/crucial-64gb-(2-x-32gb)-ddr5-5600-pc5-44800-cl46-dual-channel-laptop-memory-kit-ct2k32g56c46s5-black) |
-| **Storage**           | 2TB M2 | 1TB M2 |
+| **Storage**           | 2TB M2 | 2TB M2 |
 | **Mouse**             | [Logitech G502](https://www.logitechg.com/en-us/products/gaming-mice/g502-hero-gaming-mouse.910-005469.html) | -- |
 | **Keyboard**          | [Logitech K350](https://www.logitech.com/en-us/products/keyboards/k350-wave-ergonomic.920-001996.html) | -- |
-| **Monitor**           | 65in Samsung 4k TV | 16.1" 144Hz Laptop Display |
+| **Monitor**           | 65in Samsung 4k TV | 17.3" 1080p |
 
 ### VSCode Setup
 
