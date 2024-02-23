@@ -16,13 +16,16 @@ _The scripts below will require modification unless you want my exact setup, whi
     - [Ubuntu Server Setup](#ubuntu-server-setup)
     - [AGiXT VM Setup](#agixt-vm-setup)
   - [Workstations](#workstations)
-  - [Ubuntu Workstation Setup](#ubuntu-workstation-setup)
-  - [Windows Workstation Setup](#windows-workstation-setup)
+    - [Ubuntu Workstation Setup](#ubuntu-workstation-setup)
+    - [Windows Workstation Setup](#windows-workstation-setup)
   - [VSCode Setup](#vscode-setup)
     - [Settings](#settings)
     - [Extensions](#extensions)
   - [My Workstation Hardware](#my-workstation-hardware)
     - [Mouse Bindings for `Logitech G502`](#mouse-bindings-for-logitech-g502)
+  - [Potentially Important Links](#potentially-important-links)
+    - [Operating System Downloads](#operating-system-downloads)
+    - [Software Downloads](#software-downloads)
 
 ## Servers
 
@@ -50,7 +53,7 @@ git clone https://github.com/Josh-XT/Setup
 
 ## Workstations
 
-## Ubuntu Workstation Setup
+### Ubuntu Workstation Setup
 
 The `WorkstationSetup.sh` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  `WorkstationSetup.sh` was created to work on any `Ubuntu` based distrobution, such as `Pop!_OS`, `Mint`, etc.
 
@@ -70,7 +73,7 @@ _**Note: WorkstationSetup.sh should be modified before running it so that you ca
 
 For more information, check out the [AGiXT](https://github.com/Josh-XT/AGiXT) repository.
 
-## Windows Workstation Setup
+### Windows Workstation Setup
 
 After a fresh Windows 11 install, open the Windows Store, get all updates, then run windows updates until caught up, then reboot.  After that, open PowerShell as an administrator and run the following commands:
 
@@ -109,10 +112,10 @@ Some settings I'd highly recommend setting up the auto save on focus change as w
 | Setting                       | Value             |
 |-------------------------------|-------------------|
 | `Files: Auto Save`            | `onFocusChange`   |
-| `Formatting: Provider`        | `black`           |
-| `Formatting: Black Path`      | `black`           |
+| `Editor: Default Formatter`   | `Black Formatter` |
 | `Editor: Format on Save`      | `Checked`         |
 | `Editor: Format On Save Mode` | `file`            |
+| `Notebook: Format On Save`    | `Checked`         |
 
 ### Extensions
 
@@ -148,3 +151,19 @@ In Linux, I use `Piper` to configure my mouse.  I have the following bindings se
 | G7 | CTRL + SUPER + DOWNARROW | Navigate to the workspace down from the current one. |
 | G8 | CTRL + SUPER + UPARROW | Navigate to the workspace up from the current one. |
 | G9 | SUPER + B | Open a new web browser window. |
+
+## Potentially Important Links
+
+### Operating System Downloads
+
+- [Windows 11](https://www.microsoft.com/software-download/windows11)
+- [Ubuntu Server](https://ubuntu.com/download/server)
+- [Ubuntu Desktop](https://ubuntu.com/download/desktop)
+- [Pop!_OS](https://pop.system76.com/)
+
+### Software Downloads
+
+- [Cuda Toolkit](https://developer.nvidia.com/cuda-downloads)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/)
