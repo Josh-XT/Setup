@@ -17,10 +17,13 @@ _The scripts below will require modification unless you want my exact setup, whi
     - [AGiXT VM Setup](#agixt-vm-setup)
   - [Workstations](#workstations)
     - [Ubuntu Workstation Setup](#ubuntu-workstation-setup)
+      - [Ubuntu Local AI Setup](#ubuntu-local-ai-setup)
     - [Windows Workstation Setup](#windows-workstation-setup)
+      - [Windows Local AI Setup](#windows-local-ai-setup)
   - [VSCode Setup](#vscode-setup)
     - [Settings](#settings)
     - [Extensions](#extensions)
+  - [Clone All Repositories](#clone-all-repositories)
   - [My Workstation Hardware](#my-workstation-hardware)
     - [Mouse Bindings for `Logitech G502`](#mouse-bindings-for-logitech-g502)
   - [Potentially Important Links](#potentially-important-links)
@@ -73,11 +76,38 @@ _**Note: WorkstationSetup.sh should be modified before running it so that you ca
 
 For more information, check out the [AGiXT](https://github.com/Josh-XT/AGiXT) repository.
 
+#### Ubuntu Local AI Setup
+
+First, make sure the [Cuda Toolkit](https://developer.nvidia.com/cuda-downloads) is installed as well as [Docker](https://www.docker.com/products/docker-desktop).  You will also need to install [NVIDIA Container Toolkit]
+
+To set up [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) and [AGiXT](https://github.com/Josh-XT/AGiXT), start with opening two separate terminals.
+
+If you want to run a different model in ezlocalai, modify the `.env` file per the instructions in the [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) repository.
+
+Terminal 1 (ezlocalai):
+
+```bash
+git clone https://github.com/DevXT-LLC/ezlocalai
+cd ezlocalai
+sudo pwsh ./start.ps1
+```
+
+Terminal 2 (AGiXT):
+
+```bash
+git clone https://github.com/Josh-XT/AGiXT
+cd AGiXT
+sudo pwsh ./AGiXT.ps1
+```
+
+Once both are running, you can navigate to <http://localhost:8501> for the AGiXT Streamlit interface to create and manage your artificial intelligence agents.
+
 ### Windows Workstation Setup
 
 After a fresh Windows 11 install, open the Windows Store, get all updates, then run windows updates until caught up, then reboot.  After that, open PowerShell as an administrator and run the following commands:
 
 ```bash
+Set-ExecutionPolicy Bypass
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Git.Git
 winget install -e --id Microsoft.PowerShell
@@ -100,6 +130,32 @@ winget install -e --id SlackTechnologies.Slack
 ```
 
 Once the above commands are run, open `Visual Studio Code` and sign in with your GitHub account to sync settings and extensions.
+
+#### Windows Local AI Setup
+
+First, make sure the [Cuda Toolkit](https://developer.nvidia.com/cuda-downloads) is installed as well as [Docker Desktop](https://www.docker.com/products/docker-desktop).
+
+To set up [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) and [AGiXT](https://github.com/Josh-XT/AGiXT), start with opening two separate terminals.
+
+If you want to run a different model in ezlocalai, modify the `.env` file per the instructions in the [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) repository.
+
+Terminal 1 (ezlocalai):
+
+```bash
+git clone https://github.com/DevXT-LLC/ezlocalai
+cd ezlocalai
+./start.ps1
+```
+
+Terminal 2 (AGiXT):
+
+```bash
+git clone https://github.com/Josh-XT/AGiXT
+cd AGiXT
+./AGiXT.ps1
+```
+
+Once both are running, you can navigate to <http://localhost:8501> for the AGiXT Streamlit interface to create and manage your artificial intelligence agents.
 
 ## VSCode Setup
 
@@ -180,6 +236,16 @@ code --install-extension wayou.vscode-todo-highlight
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension zetta.qsharp-extensionpack
 ```
+
+## Clone All Repositories
+
+Once the workstation setup is complete, you can clone all of your GitHub repositories easily with the `GetRepos.ipynb` notebook. This will clone all GitHub repositories that you own or collaborate on sorted by organization/owner into your defined `repo_dir`.
+
+- Open the `GetRepos.ipynb` notebook in VSCode
+- Enter your [GitHub Personal Access Token](https://github.com/settings/tokens) into the `gh_token` variable
+- Update the `repo_dir` with the path that you would like to clone the repositories to
+- Run the notebook and wait for all of your repositories to be cloned.
+- Open the `repo_dir` in VSCode to start working on your projects.
 
 ## My Workstation Hardware
 
