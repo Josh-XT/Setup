@@ -55,7 +55,7 @@ sudo apt install -y software-properties-common
 sudo apt install -y ocl-icd-opencl-dev opencl-headers clinfo libclblast-dev libopenblas-dev cmake gcc g++
 # Snap
 sudo apt install -y snapd
-sudo snap install -y code --classic
+sudo snap install code --classic
 sudo snap install dotnet-sdk --classic --channel=8.0
 sudo snap alias dotnet-sdk.dotnet dotnet
 sudo snap install powershell --classic
