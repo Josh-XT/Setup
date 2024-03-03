@@ -3,16 +3,10 @@ echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremov
 # Update APT
 sudo apt-get update
 sudo apt update && sudo apt upgrade -y && sudo snap refresh
-sudo apt install -y curl
 # Microsoft Packages
 wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
-# NodeJS
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-nvm install --lts
-nvm use --lts
-sudo npm install --global yarn
 # Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
@@ -21,17 +15,12 @@ rm google-chrome-stable_current_amd64.deb
 wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
-# Signal
-wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
-cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\
-  sudo tee /etc/apt/sources.list.d/signal-xenial.list
-sudo apt install -y signal-desktop
 # Remove LibreOffice
 sudo apt remove -y libreoffice*
 # Git
 sudo apt install -y git
 git config --global submodule.recurse true
+git config --global credential.helper store
 git config --global user.email "josh@devxt.com"
 git config --global user.name "Josh XT"
 echo "Updates" > ~/.gitmessage
@@ -63,6 +52,11 @@ sudo snap install discord
 sudo snap install onlyoffice-desktopeditors
 sudo snap install --edge spotify
 sudo snap install slack
+# NodeJS
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+nvm install --lts
+nvm use --lts
+sudo npm install --global yarn
 # Cuda things
 sudo ubuntu-drivers install nvidia-driver-545
 sudo apt install -y nvidia-utils-545
