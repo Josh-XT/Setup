@@ -3,6 +3,7 @@ echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremov
 # Update APT
 sudo apt-get update
 sudo apt update && sudo apt upgrade -y && sudo snap refresh
+sudo apt install -y curl
 # Microsoft Packages
 wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
