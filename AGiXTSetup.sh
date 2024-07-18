@@ -14,4 +14,4 @@ sudo service docker start
 sudo apt install python3-full python3-pip -y
 git clone https://github.com/Josh-XT/AGiXT
 cd AGiXT
-sudo ./AGiXT.sh
+sudo python3 start.py
