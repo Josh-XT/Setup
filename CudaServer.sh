@@ -1,5 +1,9 @@
 #!/bin/bash
-
+echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" >> ~/.bashrc
+git config --global submodule.recurse true
+git config --global credential.helper store
+git config --global user.email "admin@agixt.com"
+git config --global user.name "admin"
 # Set error handling
 set -e
 
@@ -10,6 +14,45 @@ LOG_FILE="/var/log/nvidia_installation.log"
 log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
 }
+
+# Install Python 3.10 and pip
+if ! command -v python3.10 &> /dev/null; then
+    log_message "Python 3.10 not found. Attempting to install..."
+    if command -v apt-get &> /dev/null; then
+        sudo DEBIAN_FRONTEND=noninteractive apt-get update
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
+        sudo add-apt-repository -y ppa:deadsnakes/ppa
+        sudo DEBIAN_FRONTEND=noninteractive apt-get update
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3.10 python3.10-venv python3.10-dev
+    elif command -v yum &> /dev/null; then
+        sudo yum install -y centos-release-scl
+        sudo yum install -y rh-python310
+        source /opt/rh/rh-python310/enable
+    else
+        log_message "Unable to install Python 3.10. Please install it manually."
+        exit 1
+    fi
+else
+    log_message "Python 3.10 is already installed."
+fi
+
+# Ensure pip is installed for Python 3.10
+if ! python3.10 -m pip --version &> /dev/null; then
+    log_message "pip for Python 3.10 not found. Attempting to install..."
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3.10 get-pip.py --user
+    rm get-pip.py
+fi
+
+# Create aliases
+alias python=python3.10
+alias pip="python3.10 -m pip"
+
+# Add aliases to .bashrc for persistence
+echo "alias python=python3.10" >> ~/.bashrc
+echo "alias pip='python3.10 -m pip'" >> ~/.bashrc
+
+log_message "Python 3.10 and pip installation and configuration completed."
 
 log_message "NVIDIA CUDA 12.3 and Container Toolkit installation script started"
 
@@ -78,7 +121,5 @@ log_message "Verifying installations"
 nvidia-smi
 nvcc --version
 docker --version
-sudo docker run --rm --gpus all nvidia/cuda:12.3.0-base-ubuntu22.04 nvidia-smi
-
 log_message "Installation completed successfully"
-log_message "Cleanup completed"
+log_message "Reboot the system to complete the installation."
