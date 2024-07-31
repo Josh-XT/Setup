@@ -54,10 +54,10 @@ echo "alias pip='python3.10 -m pip'" >> ~/.bashrc
 
 log_message "Python 3.10 and pip installation and configuration completed."
 
-log_message "NVIDIA CUDA 12.3 and Container Toolkit installation script started"
+log_message "NVIDIA CUDA and Container Toolkit installation script started"
 
 # NVIDIA drivers and CUDA installation
-log_message "Starting NVIDIA drivers and CUDA 12.3 installation"
+log_message "Starting NVIDIA drivers and CUDA installation"
 if ! command -v nvidia-smi &> /dev/null; then
     log_message "NVIDIA drivers not found. Attempting to install..."
     sudo apt-get update
@@ -68,12 +68,12 @@ else
 fi
 
 if ! command -v nvcc &> /dev/null; then
-    log_message "CUDA not found. Attempting to install CUDA 12.3..."
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
-    sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-    wget https://developer.download.nvidia.com/compute/cuda/12.3.0/local_installers/cuda-repo-ubuntu2204-12-3-local_12.3.0-545.23.06-1_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu2204-12-3-local_12.3.0-545.23.06-1_amd64.deb
-    sudo cp /var/cuda-repo-ubuntu2204-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+    log_message "CUDA not found. Attempting to install CUDA..."
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin
+    sudo mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    wget https://developer.download.nvidia.com/compute/cuda/12.5.1/local_installers/cuda-repo-ubuntu2404-12-5-local_12.5.1-555.42.06-1_amd64.deb
+    sudo dpkg -i cuda-repo-ubuntu2404-12-5-local_12.5.1-555.42.06-1_amd64.deb
+    sudo cp /var/cuda-repo-ubuntu2404-12-5-local/cuda-*-keyring.gpg /usr/share/keyrings/
     sudo apt-get update
     sudo apt-get -y install cuda
 else
@@ -121,5 +121,7 @@ log_message "Verifying installations"
 nvidia-smi
 nvcc --version
 docker --version
+docker-compose --version
+python3.10 --version
 log_message "Installation completed successfully"
 log_message "Reboot the system to complete the installation."
