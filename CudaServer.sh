@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" >> ~/.bashrc
+log_message "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" >> ~/.bashrc
 git config --global submodule.recurse true
 git config --global credential.helper store
 git config --global user.email "admin@agixt.com"
@@ -12,7 +12,7 @@ LOG_FILE="/var/log/nvidia_installation.log"
 
 # Function to log messages
 log_message() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
+    log_message "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
 }
 
 # Install Python 3.10 and pip
@@ -49,8 +49,8 @@ alias python=python3.10
 alias pip="python3.10 -m pip"
 
 # Add aliases to .bashrc for persistence
-echo "alias python=python3.10" >> ~/.bashrc
-echo "alias pip='python3.10 -m pip'" >> ~/.bashrc
+log_message "alias python=python3.10" >> ~/.bashrc
+log_message "alias pip='python3.10 -m pip'" >> ~/.bashrc
 
 log_message "Python 3.10 and pip installation and configuration completed."
 
@@ -87,7 +87,7 @@ if ! command -v docker &> /dev/null; then
     sudo apt-get update
     sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    log_message "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 else
@@ -115,6 +115,85 @@ sudo nvidia-ctk runtime configure --runtime=docker
 
 log_message "Restarting Docker daemon"
 sudo systemctl restart docker
+
+# Function to get the LVM physical volume
+get_lvm_pv() {
+    vg_name=$(lvs --noheadings -o vg_name /dev/mapper/ubuntu--vg-ubuntu--lv | tr -d ' ')
+    pv_device=$(pvs --noheadings -o pv_name | grep $(vgs --noheadings -o pv_name $vg_name | tr -d ' ') | tr -d ' ')
+    log_message $pv_device
+}
+
+# Function to get total disk size
+get_disk_size() {
+    disk_device=$(log_message $1 | sed 's/p[0-9]*$//')
+    size_kb=$(lsblk -ndo SIZE -b $disk_device | awk '{print int($1/1024)}')
+    log_message $size_kb
+}
+
+# Function to get sizes of all partitions
+get_partition_sizes() {
+    disk_device=$(log_message $1 | sed 's/p[0-9]*$//')
+    lsblk -nlo SIZE,NAME,TYPE -b $disk_device | awk '{print int($1/1024), $2, $3}'
+}
+
+# Function to extend the logical volume and filesystem
+extend_lv_and_fs() {
+    # Get the root logical volume
+    root_lv="/dev/mapper/ubuntu--vg-ubuntu--lv"
+
+    # Get the current size of the LV in KB
+    current_size=$(lvs --noheadings --units k -o lv_size $root_lv | tr -d ' K' | cut -d'.' -f1)
+
+    # Get the total disk size and sizes of all partitions
+    lvm_pv=$1
+    total_disk_size=$(get_disk_size $lvm_pv)
+    log_message "Total disk size: $((total_disk_size / 1024 / 1024))GB"
+
+    log_message "Partition sizes:"
+    get_partition_sizes $lvm_pv
+
+    # Get the size of the LVM partition
+    lvm_partition_size=$(lsblk -nlo SIZE,NAME -b | grep "${lvm_pv##*/}" | awk '{print int($1/1024)}')
+    log_message "LVM partition size: $((lvm_partition_size / 1024 / 1024))GB"
+
+    # Calculate the size to extend in KB, leaving a 4MB buffer for LVM metadata
+    extend_size=$((lvm_partition_size - current_size - 4096))  # 4MB = 4096KB
+
+    log_message "Current LV size: $((current_size / 1024 / 1024))GB"
+    log_message "Available space for extension: $((extend_size / 1024 / 1024))GB"
+
+    if [ $extend_size -le 0 ]; then
+        log_message "No significant space available for extension. Exiting."
+        exit 0
+    fi
+
+    log_message "Extending the logical volume by $((extend_size / 1024))MB..."
+    lvextend -L +${extend_size}K $root_lv
+
+    log_message "Resizing the filesystem..."
+    resize2fs $root_lv
+}
+# Main execution
+log_message "Starting LVM expansion process..."
+
+# Get the LVM PV
+lvm_pv=$(get_lvm_pv)
+log_message "LVM Physical Volume: $lvm_pv"
+
+# Print current LV size
+log_message "Current LV size:"
+lvs --units g /dev/mapper/ubuntu--vg-ubuntu--lv
+
+# Extend LV and filesystem
+extend_lv_and_fs $lvm_pv
+
+# Print new LV size
+log_message "New LV size:"
+lvs --units g /dev/mapper/ubuntu--vg-ubuntu--lv
+
+log_message "LVM expansion process completed."
+df -h
+lsblk
 
 # Verification
 log_message "Verifying installations"
