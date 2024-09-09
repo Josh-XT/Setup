@@ -12,7 +12,7 @@ LOG_FILE="/var/log/nvidia_installation.log"
 
 # Function to log messages
 log_message() {
-    log_message "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
 }
 
 # Install Python 3.10 and pip
