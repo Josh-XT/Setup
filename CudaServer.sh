@@ -2,8 +2,8 @@
 log_message "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" >> ~/.bashrc
 git config --global submodule.recurse true
 git config --global credential.helper store
-git config --global user.email "admin@agixt.com"
-git config --global user.name "admin"
+git config --global user.email "vesiassr@gmail.com"
+git config --global user.name "Vesias"
 # Set error handling
 set -e
 
@@ -62,7 +62,7 @@ if ! command -v nvidia-smi &> /dev/null; then
     log_message "NVIDIA drivers not found. Attempting to install..."
     sudo apt-get update
     sudo apt-get install -y linux-headers-$(uname -r)
-    sudo apt-get install -y nvidia-driver-535 nvidia-utils-535
+    sudo apt-get install -y nvidia-driver-560 nvidia-utils-560
 else
     log_message "NVIDIA drivers are already installed."
 fi
@@ -71,9 +71,10 @@ if ! command -v nvcc &> /dev/null; then
     log_message "CUDA not found. Attempting to install CUDA..."
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin
     sudo mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600
-    wget https://developer.download.nvidia.com/compute/cuda/12.5.1/local_installers/cuda-repo-ubuntu2404-12-5-local_12.5.1-555.42.06-1_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu2404-12-5-local_12.5.1-555.42.06-1_amd64.deb
-    sudo cp /var/cuda-repo-ubuntu2404-12-5-local/cuda-*-keyring.gpg /usr/share/keyrings/
+    wget https://developer.download.nvidia.com/compute/cuda/12.6.1/local_installers/cuda-repo-ubuntu2404-12-6-local_12.6.1-560.35.03-1_amd64.deb
+    sudo dpkg -i cuda-repo-ubuntu2404-12-6-local_12.6.1-560.35.03-1_amd64.deb
+    sudo cp /var/cuda-repo-ubuntu2404-12-6-local/cuda-*-keyring.gpg /usr/share/keyrings/sudo apt-get update
+    sudo apt-get -y install cuda-toolkit-12-6
     sudo apt-get update
     sudo apt-get -y install cuda
 else
