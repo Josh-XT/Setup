@@ -46,11 +46,16 @@ set_firefox_preferences() {
     PREFS_FILE="$PROFILE_DIR/prefs.js"
     USER_JS_FILE="$PROFILE_DIR/user.js"
     
+    # Define homepage
+    HOMEPAGE="http://devxt-nas01:31437"
+    
     # Create user.js file to override default preferences
     cat > "$USER_JS_FILE" << EOF
-user_pref("browser.startup.homepage", "http://devxt-nas01:31437");
+user_pref("browser.startup.homepage", "$HOMEPAGE");
 user_pref("browser.startup.page", 1);
 user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("browser.newtabpage.enabled", false);
+user_pref("browser.startup.firstrunSkipsHomepage", false);
 user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
@@ -58,15 +63,47 @@ user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 user_pref("browser.uitour.enabled", false);
 EOF
     
+    # Append to prefs.js file as well
+    echo "user_pref(\"browser.startup.homepage\", \"$HOMEPAGE\");" >> "$PREFS_FILE"
+    
+    # Create a policies.json file for system-wide Firefox policies
+    POLICIES_DIR="/usr/lib/firefox/distribution"
+    mkdir -p "$POLICIES_DIR"
+    cat > "$POLICIES_DIR/policies.json" << EOF
+{
+  "policies": {
+    "Homepage": {
+      "URL": "$HOMEPAGE",
+      "Locked": true,
+      "Additional": [""]
+    },
+    "NewTabPage": false
+  }
+}
+EOF
+    
     # Update Firefox desktop file to use the new profile
     DESKTOP_FILE="/usr/share/applications/firefox.desktop"
-    sed -i 's/Exec=firefox/Exec=firefox -P kids_profile/' "$DESKTOP_FILE"
+    sed -i "s|Exec=firefox %u|Exec=firefox -P $PROFILE_NAME %u|" "$DESKTOP_FILE"
     
     # Update the Firefox autostart file
     AUTOSTART_FILE="/home/kids/.config/autostart/firefox-fullscreen.desktop"
-    sed -i 's/Exec=firefox --kiosk/Exec=firefox -P kids_profile --kiosk/' "$AUTOSTART_FILE"
+    mkdir -p "$(dirname "$AUTOSTART_FILE")"
+    cat > "$AUTOSTART_FILE" << EOF
+[Desktop Entry]
+Type=Application
+Exec=firefox -P $PROFILE_NAME --kiosk $HOMEPAGE
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Firefox Fullscreen
+Name=Firefox Fullscreen
+Comment[en_US]=Start Firefox in fullscreen mode
+Comment=Start Firefox in fullscreen mode
+EOF
     
     chown -R kids:kids "$FIREFOX_DIR"
+    chown -R kids:kids "$(dirname "$AUTOSTART_FILE")"
 }
 
 # Function to create a startup script for Firefox in full-screen mode
