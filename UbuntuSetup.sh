@@ -123,6 +123,7 @@ fi
 
 # Function to ensure LVM tools are installed
 ensure_lvm_tools() {
+    log_message "Checking for LVM tools..."
     if ! command -v lvs &> /dev/null || ! command -v pvs &> /dev/null || ! command -v vgs &> /dev/null; then
         log_message "LVM tools not found. Attempting to install LVM2 package..."
         sudo apt-get update
@@ -140,37 +141,47 @@ ensure_lvm_tools() {
 
 # Function to get the LVM physical volume
 get_lvm_pv() {
+    log_message "Attempting to get LVM physical volume..."
     if ! ensure_lvm_tools; then
+        log_message "LVM tools check failed. Exiting get_lvm_pv function."
         return 1
     fi
+    log_message "Checking for ubuntu--vg-ubuntu--lv volume..."
     vg_name=$(sudo lvs --noheadings -o vg_name /dev/mapper/ubuntu--vg-ubuntu--lv 2>/dev/null | tr -d ' ')
     if [ -z "$vg_name" ]; then
         log_message "Failed to get volume group name. LVM might not be in use on this system."
         return 1
     fi
+    log_message "Volume group name: $vg_name"
+    log_message "Attempting to get physical volume device..."
     pv_device=$(sudo pvs --noheadings -o pv_name 2>/dev/null | grep $(sudo vgs --noheadings -o pv_name $vg_name 2>/dev/null | tr -d ' ') | tr -d ' ')
     if [ -z "$pv_device" ]; then
         log_message "Failed to get physical volume device. LVM might not be in use on this system."
         return 1
     fi
+    log_message "Physical volume device: $pv_device"
     echo $pv_device
 }
 
 # Function to get total disk size
 get_disk_size() {
+    log_message "Getting disk size for device: $1"
     disk_device=$(echo $1 | sed 's/p[0-9]*$//')
     size_kb=$(sudo lsblk -ndo SIZE -b $disk_device | awk '{print int($1/1024)}')
+    log_message "Disk size: $((size_kb / 1024 / 1024))GB"
     echo $size_kb
 }
 
 # Function to get sizes of all partitions
 get_partition_sizes() {
+    log_message "Getting partition sizes for device: $1"
     disk_device=$(echo $1 | sed 's/p[0-9]*$//')
     sudo lsblk -nlo SIZE,NAME,TYPE -b $disk_device | awk '{print int($1/1024), $2, $3}'
 }
 
 # Function to extend the logical volume and filesystem
 extend_lv_and_fs() {
+    log_message "Starting LV and filesystem extension process..."
     if ! ensure_lvm_tools; then
         log_message "LVM tools are not available. Skipping LVM expansion."
         return 1
@@ -180,16 +191,20 @@ extend_lv_and_fs() {
     root_lv="/dev/mapper/ubuntu--vg-ubuntu--lv"
 
     # Check if the root LV exists
+    log_message "Checking if root LV exists: $root_lv"
     if ! sudo lvdisplay $root_lv &> /dev/null; then
         log_message "Root logical volume $root_lv not found. Skipping LVM expansion."
         return 1
     fi
 
     # Get the current size of the LV in KB
+    log_message "Getting current LV size..."
     current_size=$(sudo lvs --noheadings --units k -o lv_size $root_lv | tr -d ' K' | cut -d'.' -f1)
+    log_message "Current LV size: $((current_size / 1024 / 1024))GB"
 
     # Get the total disk size and sizes of all partitions
     lvm_pv=$1
+    log_message "LVM PV: $lvm_pv"
     total_disk_size=$(get_disk_size $lvm_pv)
     log_message "Total disk size: $((total_disk_size / 1024 / 1024))GB"
 
@@ -197,13 +212,13 @@ extend_lv_and_fs() {
     get_partition_sizes $lvm_pv
 
     # Get the size of the LVM partition
+    log_message "Getting LVM partition size..."
     lvm_partition_size=$(sudo lsblk -nlo SIZE,NAME -b | grep "${lvm_pv##*/}" | awk '{print int($1/1024)}')
     log_message "LVM partition size: $((lvm_partition_size / 1024 / 1024))GB"
 
     # Calculate the size to extend in KB, leaving a 4MB buffer for LVM metadata
     extend_size=$((lvm_partition_size - current_size - 4096))  # 4MB = 4096KB
 
-    log_message "Current LV size: $((current_size / 1024 / 1024))GB"
     log_message "Available space for extension: $((extend_size / 1024 / 1024))GB"
 
     if [ $extend_size -le 0 ]; then
@@ -213,9 +228,19 @@ extend_lv_and_fs() {
 
     log_message "Extending the logical volume by $((extend_size / 1024))MB..."
     sudo lvextend -L +${extend_size}K $root_lv
+    if [ $? -ne 0 ]; then
+        log_message "Failed to extend logical volume. Exiting."
+        return 1
+    fi
 
     log_message "Resizing the filesystem..."
     sudo resize2fs $root_lv
+    if [ $? -ne 0 ]; then
+        log_message "Failed to resize filesystem. Exiting."
+        return 1
+    fi
+
+    log_message "LV and filesystem extension completed successfully."
 }
 
 # Main execution
@@ -242,7 +267,9 @@ else
     log_message "LVM expansion process completed."
 fi
 
+log_message "Displaying disk usage information:"
 df -h
+log_message "Displaying block device information:"
 lsblk
 
 # Verification
