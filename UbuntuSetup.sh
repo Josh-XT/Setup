@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" > "$HOME/.bash_aliases"
+echo "alias docker-compose='docker compose'" >> "$HOME/.bash_aliases"
 git config --global submodule.recurse true
 git config --global credential.helper store
 git config --global user.email "admin@agixt.com"
@@ -128,7 +129,7 @@ if lspci | grep -i nvidia &> /dev/null; then
     nvcc --version
 fi
 docker --version
-docker-compose --version
+docker compose --version
 python3.10 --version
 log_message "Installation completed successfully"
 log_message "Rebooting the system to complete the installation."
