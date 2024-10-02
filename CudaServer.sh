@@ -6,7 +6,7 @@ git config --global user.email "admin@agixt.com"
 git config --global user.name "admin"
 # Set error handling
 set -e
-
+sudo apt install curl -y
 # Define variables
 LOG_FILE="/var/log/nvidia_installation.log"
 

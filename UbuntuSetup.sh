@@ -4,6 +4,7 @@ git config --global submodule.recurse true
 git config --global credential.helper store
 git config --global user.email "admin@agixt.com"
 git config --global user.name "admin"
+sudo apt install curl -y
 # Set error handling
 set -e
 
