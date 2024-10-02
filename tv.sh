@@ -101,6 +101,34 @@ EOF
     chown -R kids:kids /home/kids/.config
 }
 
+modify_hosts_file() {
+    echo "Modifying hosts file to redirect certain websites"
+    
+    # Define the websites to be redirected
+    WEBSITES=(
+        "www.youtube.com"
+        "youtube.com"
+        "youtu.be"
+        "www.facebook.com"
+        "facebook.com"
+        "www.tiktok.com"
+        "tiktok.com"
+        # Add more websites as needed
+    )
+    
+    # Backup the original hosts file
+    cp /etc/hosts /etc/hosts.backup
+    
+    # Add redirects to the hosts file
+    for site in "${WEBSITES[@]}"; do
+        if ! grep -q "$site" /etc/hosts; then
+            echo "127.0.0.1 $site" >> /etc/hosts
+        fi
+    done
+    
+    echo "Hosts file modified. Specified websites will be redirected to localhost."
+}
+
 # Main script execution
 check_sudo
 create_kids_user
@@ -108,5 +136,6 @@ configure_auto_login
 set_firefox_preferences
 create_firefox_startup_script
 enable_onscreen_keyboard
+modify_hosts_file
 
 echo "Setup complete. Please reboot the system to apply changes."
