@@ -32,105 +32,64 @@ configure_auto_login() {
     fi
 }
 
-# Updated function to set Firefox preferences
-set_firefox_preferences() {
-    echo "Setting Firefox preferences"
-    FIREFOX_DIR="/home/kids/.mozilla/firefox"
-    mkdir -p "$FIREFOX_DIR"
-    chown kids:kids "$FIREFOX_DIR"
+# Function to set up Chromium
+setup_chromium() {
+    echo "Setting up Chromium"
     
-    # Create a new Firefox profile
-    PROFILE_NAME="kids_profile"
-    sudo -u kids firefox -CreateProfile "$PROFILE_NAME $FIREFOX_DIR/$PROFILE_NAME"
-    
-    PROFILE_DIR="$FIREFOX_DIR/$PROFILE_NAME"
-    PREFS_FILE="$PROFILE_DIR/prefs.js"
-    USER_JS_FILE="$PROFILE_DIR/user.js"
-    
+    # Install Chromium
+    apt-get update
+    apt-get install -y chromium-browser
+
     # Define homepage
     HOMEPAGE="http://devxt-nas01:31437"
-    
-    # Create user.js file to override default preferences
-    cat > "$USER_JS_FILE" << EOF
-user_pref("browser.startup.homepage", "$HOMEPAGE");
-user_pref("browser.startup.page", 1);
-user_pref("browser.startup.homepage_override.mstone", "ignore");
-user_pref("browser.newtabpage.enabled", false);
-user_pref("browser.startup.firstrunSkipsHomepage", false);
-user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
-user_pref("browser.shell.checkDefaultBrowser", false);
-user_pref("datareporting.policy.dataSubmissionEnabled", false);
-user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
-user_pref("browser.uitour.enabled", false);
-EOF
-    chown kids:kids "$USER_JS_FILE"
-    
-    # Append to prefs.js file as well
-    echo "user_pref(\"browser.startup.homepage\", \"$HOMEPAGE\");" >> "$PREFS_FILE"
-    chown kids:kids "$PREFS_FILE"
-    
-    # Create a policies.json file for system-wide Firefox policies
-    POLICIES_DIR="/usr/lib/firefox/distribution"
+
+    # Create Chromium policies directory
+    POLICIES_DIR="/etc/chromium-browser/policies/managed"
     mkdir -p "$POLICIES_DIR"
-    cat > "$POLICIES_DIR/policies.json" << EOF
+
+    # Create policy file to set homepage and other settings
+    cat > "$POLICIES_DIR/kids_policy.json" << EOF
 {
-  "policies": {
-    "Homepage": {
-      "URL": "$HOMEPAGE",
-      "Locked": true,
-      "Additional": [""]
-    },
-    "NewTabPage": false
-  }
+    "HomepageLocation": "$HOMEPAGE",
+    "HomepageIsNewTabPage": false,
+    "NewTabPageLocation": "$HOMEPAGE",
+    "RestoreOnStartup": 4,
+    "RestoreOnStartupURLs": ["$HOMEPAGE"],
+    "BookmarkBarEnabled": false,
+    "IncognitoModeAvailability": 1,
+    "BrowserSignin": 0,
+    "SyncDisabled": true,
+    "SearchSuggestEnabled": false
 }
 EOF
-    
-    # Update Firefox desktop file to use the new profile
-    DESKTOP_FILE="/usr/share/applications/firefox.desktop"
-    if [ -f "$DESKTOP_FILE" ]; then
-        sed -i "s|Exec=firefox %u|Exec=firefox -P $PROFILE_NAME %u|" "$DESKTOP_FILE"
-    else
-        echo "Firefox desktop file not found at $DESKTOP_FILE"
-    fi
-    
-    # Update the Firefox autostart file
+
+    # Create autostart directory for kids user
     AUTOSTART_DIR="/home/kids/.config/autostart"
     mkdir -p "$AUTOSTART_DIR"
     chown kids:kids "$AUTOSTART_DIR"
-    AUTOSTART_FILE="$AUTOSTART_DIR/firefox-fullscreen.desktop"
-    cat > "$AUTOSTART_FILE" << EOF
+
+    # Create autostart entry for Chromium in kiosk mode
+    cat > "$AUTOSTART_DIR/chromium-kiosk.desktop" << EOF
 [Desktop Entry]
 Type=Application
-Exec=firefox -P $PROFILE_NAME --kiosk $HOMEPAGE
+Exec=chromium-browser --kiosk --no-first-run --disable-pinch --overscroll-history-navigation=0 --disable-features=TranslateUI --no-default-browser-check $HOMEPAGE
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=Firefox Fullscreen
-Name=Firefox Fullscreen
-Comment[en_US]=Start Firefox in fullscreen mode
-Comment=Start Firefox in fullscreen mode
+Name[en_US]=Chromium Kiosk
+Name=Chromium Kiosk
+Comment=Start Chromium in kiosk mode
 EOF
-    chown kids:kids "$AUTOSTART_FILE"
+    chown kids:kids "$AUTOSTART_DIR/chromium-kiosk.desktop"
 }
 
-# Function to enable on-screen keyboard with voice input
+# Function to enable on-screen keyboard
 enable_onscreen_keyboard() {
-    echo "Enabling on-screen keyboard with voice input"
-    if command -v gsettings &> /dev/null; then
-        sudo -u kids gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
-        sudo -u kids gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true
-    else
-        echo "gsettings command not found. Skipping GNOME settings."
-    fi
-    
-    # Install onboard (on-screen keyboard) and speech-dispatcher (for voice input)
-    apt-get update
-    apt-get install -y onboard speech-dispatcher
-    
+    echo "Enabling on-screen keyboard"
+    apt-get install -y onboard
+
     # Create autostart entry for onboard
     AUTOSTART_DIR="/home/kids/.config/autostart"
-    mkdir -p "$AUTOSTART_DIR"
-    chown kids:kids "$AUTOSTART_DIR"
     cat > "$AUTOSTART_DIR/onboard.desktop" << EOF
 [Desktop Entry]
 Type=Application
@@ -140,7 +99,6 @@ NoDisplay=false
 X-GNOME-Autostart-enabled=true
 Name[en_US]=Onboard
 Name=Onboard
-Comment[en_US]=Start Onboard on-screen keyboard
 Comment=Start Onboard on-screen keyboard
 EOF
     chown kids:kids "$AUTOSTART_DIR/onboard.desktop"
@@ -179,7 +137,7 @@ modify_hosts_file() {
 check_sudo
 create_kids_user
 configure_auto_login
-set_firefox_preferences
+setup_chromium
 enable_onscreen_keyboard
 modify_hosts_file
 
