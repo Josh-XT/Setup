@@ -32,15 +32,16 @@ configure_auto_login() {
     fi
 }
 
-# Function to set Firefox preferences
+# Updated function to set Firefox preferences
 set_firefox_preferences() {
     echo "Setting Firefox preferences"
     FIREFOX_DIR="/home/kids/.mozilla/firefox"
     mkdir -p "$FIREFOX_DIR"
+    chown kids:kids "$FIREFOX_DIR"
     
     # Create a new Firefox profile
     PROFILE_NAME="kids_profile"
-    firefox -CreateProfile "$PROFILE_NAME $FIREFOX_DIR/$PROFILE_NAME"
+    sudo -u kids firefox -CreateProfile "$PROFILE_NAME $FIREFOX_DIR/$PROFILE_NAME"
     
     PROFILE_DIR="$FIREFOX_DIR/$PROFILE_NAME"
     PREFS_FILE="$PROFILE_DIR/prefs.js"
@@ -62,9 +63,11 @@ user_pref("datareporting.policy.dataSubmissionEnabled", false);
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 user_pref("browser.uitour.enabled", false);
 EOF
+    chown kids:kids "$USER_JS_FILE"
     
     # Append to prefs.js file as well
     echo "user_pref(\"browser.startup.homepage\", \"$HOMEPAGE\");" >> "$PREFS_FILE"
+    chown kids:kids "$PREFS_FILE"
     
     # Create a policies.json file for system-wide Firefox policies
     POLICIES_DIR="/usr/lib/firefox/distribution"
@@ -84,11 +87,17 @@ EOF
     
     # Update Firefox desktop file to use the new profile
     DESKTOP_FILE="/usr/share/applications/firefox.desktop"
-    sed -i "s|Exec=firefox %u|Exec=firefox -P $PROFILE_NAME %u|" "$DESKTOP_FILE"
+    if [ -f "$DESKTOP_FILE" ]; then
+        sed -i "s|Exec=firefox %u|Exec=firefox -P $PROFILE_NAME %u|" "$DESKTOP_FILE"
+    else
+        echo "Firefox desktop file not found at $DESKTOP_FILE"
+    fi
     
     # Update the Firefox autostart file
-    AUTOSTART_FILE="/home/kids/.config/autostart/firefox-fullscreen.desktop"
-    mkdir -p "$(dirname "$AUTOSTART_FILE")"
+    AUTOSTART_DIR="/home/kids/.config/autostart"
+    mkdir -p "$AUTOSTART_DIR"
+    chown kids:kids "$AUTOSTART_DIR"
+    AUTOSTART_FILE="$AUTOSTART_DIR/firefox-fullscreen.desktop"
     cat > "$AUTOSTART_FILE" << EOF
 [Desktop Entry]
 Type=Application
@@ -101,36 +110,15 @@ Name=Firefox Fullscreen
 Comment[en_US]=Start Firefox in fullscreen mode
 Comment=Start Firefox in fullscreen mode
 EOF
-    
-    chown -R kids:kids "$FIREFOX_DIR"
-    chown -R kids:kids "$(dirname "$AUTOSTART_FILE")"
-}
-
-# Function to create a startup script for Firefox in full-screen mode
-create_firefox_startup_script() {
-    echo "Creating Firefox startup script"
-    mkdir -p /home/kids/.config/autostart
-    cat > /home/kids/.config/autostart/firefox-fullscreen.desktop << EOF
-[Desktop Entry]
-Type=Application
-Exec=firefox --kiosk
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[en_US]=Firefox Fullscreen
-Name=Firefox Fullscreen
-Comment[en_US]=Start Firefox in fullscreen mode
-Comment=Start Firefox in fullscreen mode
-EOF
-    chown -R kids:kids /home/kids/.config
+    chown kids:kids "$AUTOSTART_FILE"
 }
 
 # Function to enable on-screen keyboard with voice input
 enable_onscreen_keyboard() {
     echo "Enabling on-screen keyboard with voice input"
     if command -v gsettings &> /dev/null; then
-        gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
-        gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true
+        sudo -u kids gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
+        sudo -u kids gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true
     else
         echo "gsettings command not found. Skipping GNOME settings."
     fi
@@ -140,8 +128,10 @@ enable_onscreen_keyboard() {
     apt-get install -y onboard speech-dispatcher
     
     # Create autostart entry for onboard
-    mkdir -p /home/kids/.config/autostart
-    cat > /home/kids/.config/autostart/onboard.desktop << EOF
+    AUTOSTART_DIR="/home/kids/.config/autostart"
+    mkdir -p "$AUTOSTART_DIR"
+    chown kids:kids "$AUTOSTART_DIR"
+    cat > "$AUTOSTART_DIR/onboard.desktop" << EOF
 [Desktop Entry]
 Type=Application
 Exec=onboard
@@ -153,9 +143,10 @@ Name=Onboard
 Comment[en_US]=Start Onboard on-screen keyboard
 Comment=Start Onboard on-screen keyboard
 EOF
-    chown -R kids:kids /home/kids/.config
+    chown kids:kids "$AUTOSTART_DIR/onboard.desktop"
 }
 
+# Function to modify hosts file for redirecting websites
 modify_hosts_file() {
     echo "Modifying hosts file to redirect certain websites"
     
@@ -189,7 +180,6 @@ check_sudo
 create_kids_user
 configure_auto_login
 set_firefox_preferences
-create_firefox_startup_script
 enable_onscreen_keyboard
 modify_hosts_file
 
