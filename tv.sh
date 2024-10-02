@@ -37,17 +37,35 @@ set_firefox_preferences() {
     echo "Setting Firefox preferences"
     FIREFOX_DIR="/home/kids/.mozilla/firefox"
     mkdir -p "$FIREFOX_DIR"
-    if [ ! -d "$FIREFOX_DIR"/*.default ]; then
-        PROFILE_DIR="$FIREFOX_DIR/profile.default"
-        mkdir -p "$PROFILE_DIR"
-    else
-        PROFILE_DIR=$(find "$FIREFOX_DIR" -maxdepth 1 -type d -name "*.default" | head -n 1)
-    fi
+    
+    # Create a new Firefox profile
+    PROFILE_NAME="kids_profile"
+    firefox -CreateProfile "$PROFILE_NAME $FIREFOX_DIR/$PROFILE_NAME"
+    
+    PROFILE_DIR="$FIREFOX_DIR/$PROFILE_NAME"
     PREFS_FILE="$PROFILE_DIR/prefs.js"
-    touch "$PREFS_FILE"
-    echo 'user_pref("browser.startup.homepage", "http://devxt-nas01:31437");' >> "$PREFS_FILE"
-    echo 'user_pref("browser.startup.page", 1);' >> "$PREFS_FILE"
-    echo 'user_pref("browser.startup.homepage_override.mstone", "ignore");' >> "$PREFS_FILE"
+    USER_JS_FILE="$PROFILE_DIR/user.js"
+    
+    # Create user.js file to override default preferences
+    cat > "$USER_JS_FILE" << EOF
+user_pref("browser.startup.homepage", "http://devxt-nas01:31437");
+user_pref("browser.startup.page", 1);
+user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
+user_pref("browser.shell.checkDefaultBrowser", false);
+user_pref("datareporting.policy.dataSubmissionEnabled", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+user_pref("browser.uitour.enabled", false);
+EOF
+    
+    # Update Firefox desktop file to use the new profile
+    DESKTOP_FILE="/usr/share/applications/firefox.desktop"
+    sed -i 's/Exec=firefox/Exec=firefox -P kids_profile/' "$DESKTOP_FILE"
+    
+    # Update the Firefox autostart file
+    AUTOSTART_FILE="/home/kids/.config/autostart/firefox-fullscreen.desktop"
+    sed -i 's/Exec=firefox --kiosk/Exec=firefox -P kids_profile --kiosk/' "$AUTOSTART_FILE"
+    
     chown -R kids:kids "$FIREFOX_DIR"
 }
 
