@@ -21,28 +21,40 @@ create_kids_user() {
 # Function to configure auto-login for the "kids" user
 configure_auto_login() {
     echo "Configuring auto-login for 'kids' user"
-    cat > /etc/gdm3/custom.conf << EOF
-[daemon]
-AutomaticLoginEnable=true
-AutomaticLogin=kids
-EOF
+    if [ -f /etc/gdm3/custom.conf ]; then
+        sed -i '/AutomaticLoginEnable/d' /etc/gdm3/custom.conf
+        sed -i '/AutomaticLogin/d' /etc/gdm3/custom.conf
+        sed -i '/\[daemon\]/a AutomaticLoginEnable=true\nAutomaticLogin=kids' /etc/gdm3/custom.conf
+    else
+        echo "[daemon]" > /etc/gdm3/custom.conf
+        echo "AutomaticLoginEnable=true" >> /etc/gdm3/custom.conf
+        echo "AutomaticLogin=kids" >> /etc/gdm3/custom.conf
+    fi
 }
 
 # Function to set Firefox preferences
 set_firefox_preferences() {
     echo "Setting Firefox preferences"
-    FIREFOX_PREFS="/home/kids/.mozilla/firefox/*.default/prefs.js"
-    mkdir -p "$(dirname "$FIREFOX_PREFS")"
-    touch "$FIREFOX_PREFS"
-    echo 'user_pref("browser.startup.homepage", "http://devxt-nas01:31437");' >> "$FIREFOX_PREFS"
-    echo 'user_pref("browser.startup.page", 1);' >> "$FIREFOX_PREFS"
-    echo 'user_pref("browser.startup.homepage_override.mstone", "ignore");' >> "$FIREFOX_PREFS"
-    chown -R kids:kids /home/kids/.mozilla
+    FIREFOX_DIR="/home/kids/.mozilla/firefox"
+    mkdir -p "$FIREFOX_DIR"
+    if [ ! -d "$FIREFOX_DIR"/*.default ]; then
+        PROFILE_DIR="$FIREFOX_DIR/profile.default"
+        mkdir -p "$PROFILE_DIR"
+    else
+        PROFILE_DIR=$(find "$FIREFOX_DIR" -maxdepth 1 -type d -name "*.default" | head -n 1)
+    fi
+    PREFS_FILE="$PROFILE_DIR/prefs.js"
+    touch "$PREFS_FILE"
+    echo 'user_pref("browser.startup.homepage", "http://devxt-nas01:31437");' >> "$PREFS_FILE"
+    echo 'user_pref("browser.startup.page", 1);' >> "$PREFS_FILE"
+    echo 'user_pref("browser.startup.homepage_override.mstone", "ignore");' >> "$PREFS_FILE"
+    chown -R kids:kids "$FIREFOX_DIR"
 }
 
 # Function to create a startup script for Firefox in full-screen mode
 create_firefox_startup_script() {
     echo "Creating Firefox startup script"
+    mkdir -p /home/kids/.config/autostart
     cat > /home/kids/.config/autostart/firefox-fullscreen.desktop << EOF
 [Desktop Entry]
 Type=Application
@@ -55,20 +67,25 @@ Name=Firefox Fullscreen
 Comment[en_US]=Start Firefox in fullscreen mode
 Comment=Start Firefox in fullscreen mode
 EOF
-    chown kids:kids /home/kids/.config/autostart/firefox-fullscreen.desktop
+    chown -R kids:kids /home/kids/.config
 }
 
 # Function to enable on-screen keyboard with voice input
 enable_onscreen_keyboard() {
     echo "Enabling on-screen keyboard with voice input"
-    gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
-    gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true
+    if command -v gsettings &> /dev/null; then
+        gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
+        gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true
+    else
+        echo "gsettings command not found. Skipping GNOME settings."
+    fi
     
     # Install onboard (on-screen keyboard) and speech-dispatcher (for voice input)
     apt-get update
     apt-get install -y onboard speech-dispatcher
     
     # Create autostart entry for onboard
+    mkdir -p /home/kids/.config/autostart
     cat > /home/kids/.config/autostart/onboard.desktop << EOF
 [Desktop Entry]
 Type=Application
@@ -81,7 +98,7 @@ Name=Onboard
 Comment[en_US]=Start Onboard on-screen keyboard
 Comment=Start Onboard on-screen keyboard
 EOF
-    chown kids:kids /home/kids/.config/autostart/onboard.desktop
+    chown -R kids:kids /home/kids/.config
 }
 
 # Main script execution
