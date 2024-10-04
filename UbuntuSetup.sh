@@ -131,6 +131,4 @@ fi
 docker --version
 docker compose --version
 python3.10 --version
-log_message "Installation completed successfully"
-log_message "Rebooting the system to complete the installation."
-sudo reboot 3
+log_message "Reboot the system to complete the installation."
