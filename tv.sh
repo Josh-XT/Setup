@@ -11,7 +11,10 @@ check_sudo() {
 # Function to create the "kids" user if it doesn't exist
 create_kids_user() {
     if id "kids" &>/dev/null; then
-        # Delete the user
+        echo "Existing 'kids' user found. Preparing for removal..."
+        pkill -u kids
+        sleep 2
+        pkill -KILL -u kids
         echo "Deleting existing 'kids' user"
         userdel -r kids
     fi
