@@ -110,30 +110,29 @@ disable_initial_setup() {
     if [ -f /etc/xdg/autostart/gnome-welcome-tour.desktop ]; then
         mv /etc/xdg/autostart/gnome-welcome-tour.desktop /etc/xdg/autostart/gnome-welcome-tour.desktop.disabled
     fi
+    
+    # Also disable pro pop-ups
+    apt-get purge -y ubuntu-advantage-tools
 }
 
 # Function to disable Windows key, sidebar, and other unwanted features
 disable_features() {
     echo "Disabling Windows key, sidebar, and other features"
 
-    # Disable Ubuntu dock system-wide
-    gsettings set org.gnome.shell enabled-extensions "[]"
-    gsettings set org.gnome.shell disabled-extensions "['ubuntu-dock@ubuntu.com']"
-
-    # Disable overlay-key (Windows key) system-wide
-    gsettings set org.gnome.mutter overlay-key ''
-
-    # Disable hot corners system-wide
-    gsettings set org.gnome.desktop.interface enable-hot-corners false
+    # Use dconf to set values for the kids user
+    sudo -u kids dbus-launch dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
+    sudo -u kids dbus-launch dconf write /org/gnome/shell/extensions/dash-to-dock/autohide true
+    sudo -u kids dbus-launch dconf write /org/gnome/mutter/overlay-key "''"
+    sudo -u kids dbus-launch dconf write /org/gnome/desktop/interface/enable-hot-corners false
 
     # Create a script to apply these settings for the kids user on login
     SCRIPT_PATH="/home/kids/.config/disable_features.sh"
     cat > "$SCRIPT_PATH" << EOF
 #!/bin/bash
-gsettings set org.gnome.shell enabled-extensions "[]"
-gsettings set org.gnome.shell disabled-extensions "['ubuntu-dock@ubuntu.com']"
-gsettings set org.gnome.mutter overlay-key ''
-gsettings set org.gnome.desktop.interface enable-hot-corners false
+dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
+dconf write /org/gnome/shell/extensions/dash-to-dock/autohide true
+dconf write /org/gnome/mutter/overlay-key "''"
+dconf write /org/gnome/desktop/interface/enable-hot-corners false
 EOF
 
     chmod +x "$SCRIPT_PATH"
@@ -154,9 +153,6 @@ Name=Disable Unwanted Features
 Comment=Disables Windows key, sidebar, and other features for kids user
 EOF
     chown -R kids:kids "$AUTOSTART_DIR"
-
-    # Disable the GNOME shell completely for the kids user
-    sudo -u kids dconf write /org/gnome/desktop/session/session-name "'ubuntu'"
 }
 
 # Main script execution
