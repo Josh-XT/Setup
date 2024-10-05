@@ -11,11 +11,12 @@ check_sudo() {
 # Function to create the "kids" user if it doesn't exist
 create_kids_user() {
     if id "kids" &>/dev/null; then
-        echo "User 'kids' already exists"
-    else
-        echo "Creating 'kids' user"
-        adduser --disabled-password --gecos "" kids
+        # Delete the user
+        echo "Deleting existing 'kids' user"
+        userdel -r kids
     fi
+    echo "Creating 'kids' user"
+    adduser --disabled-password --gecos "" kids
 }
 
 # Function to configure auto-login for the "kids" user
@@ -83,27 +84,6 @@ EOF
     chown kids:kids "$AUTOSTART_DIR/chromium-kiosk.desktop"
 }
 
-# Function to enable on-screen keyboard
-enable_onscreen_keyboard() {
-    echo "Enabling on-screen keyboard"
-    apt-get install -y onboard
-
-    # Create autostart entry for onboard
-    AUTOSTART_DIR="/home/kids/.config/autostart"
-    cat > "$AUTOSTART_DIR/onboard.desktop" << EOF
-[Desktop Entry]
-Type=Application
-Exec=onboard
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[en_US]=Onboard
-Name=Onboard
-Comment=Start Onboard on-screen keyboard
-EOF
-    chown kids:kids "$AUTOSTART_DIR/onboard.desktop"
-}
-
 # Function to modify hosts file for redirecting websites
 modify_hosts_file() {
     echo "Modifying hosts file to redirect certain websites"
@@ -133,12 +113,37 @@ modify_hosts_file() {
     echo "Hosts file modified. Specified websites will be redirected to localhost."
 }
 
+# Function to disable Ubuntu initial setup
+disable_initial_setup() {
+    echo "Disabling Ubuntu initial setup"
+    if [ -f /etc/xdg/autostart/gnome-initial-setup-first-login.desktop ]; then
+        echo "X-GNOME-Autostart-enabled=false" >> /etc/xdg/autostart/gnome-initial-setup-first-login.desktop
+    fi
+    if [ -f /etc/xdg/autostart/gnome-welcome-tour.desktop ]; then
+        echo "X-GNOME-Autostart-enabled=false" >> /etc/xdg/autostart/gnome-welcome-tour.desktop
+    fi
+}
+
+# Function to disable the Windows key and sidebar
+disable_windows_key_and_sidebar() {
+    echo "Disabling Windows key and sidebar for kids user"
+    
+    # Create or modify dconf settings for kids user
+    sudo -u kids dconf write /org/gnome/mutter/overlay-key "''"
+    sudo -u kids dconf write /org/gnome/shell/disabled-extensions "['ubuntu-dock@ubuntu.com']"
+    
+    # Disable activities overview hot corner
+    sudo -u kids dconf write /org/gnome/desktop/interface/enable-hot-corners false
+}
+
 # Main script execution
 check_sudo
+sudo apt update --fix-missing -y && sudo apt upgrade -y
 create_kids_user
 configure_auto_login
 setup_chromium
-enable_onscreen_keyboard
 modify_hosts_file
+disable_initial_setup
+disable_windows_key_and_sidebar
 
 echo "Setup complete. Please reboot the system to apply changes."
