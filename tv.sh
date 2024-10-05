@@ -12,9 +12,17 @@ check_sudo() {
 create_kids_user() {
     if id "kids" &>/dev/null; then
         echo "Existing 'kids' user found. Preparing for removal..."
+        
+        # Kill all processes owned by the 'kids' user
         pkill -u kids
+        
+        # Wait a moment to ensure processes are terminated
         sleep 2
+        
+        # Force logout of 'kids' user if logged in
         pkill -KILL -u kids
+        
+        # Delete the user and their home directory
         echo "Deleting existing 'kids' user"
         userdel -r kids
     fi
@@ -127,16 +135,38 @@ disable_initial_setup() {
     fi
 }
 
-# Function to disable the Windows key and sidebar
-disable_windows_key_and_sidebar() {
-    echo "Disabling Windows key and sidebar for kids user"
+# Function to create a script that disables Windows key and sidebar
+create_disable_script() {
+    echo "Creating script to disable Windows key and sidebar"
+    SCRIPT_PATH="/home/kids/.config/disable_winkey_sidebar.sh"
     
-    # Create or modify dconf settings for kids user
-    sudo -u kids dconf write /org/gnome/mutter/overlay-key "''"
-    sudo -u kids dconf write /org/gnome/shell/disabled-extensions "['ubuntu-dock@ubuntu.com']"
+    cat > "$SCRIPT_PATH" << EOF
+#!/bin/bash
+gsettings set org.gnome.mutter overlay-key ''
+gsettings set org.gnome.shell disabled-extensions "['ubuntu-dock@ubuntu.com']"
+gsettings set org.gnome.desktop.interface enable-hot-corners false
+EOF
     
-    # Disable activities overview hot corner
-    sudo -u kids dconf write /org/gnome/desktop/interface/enable-hot-corners false
+    chmod +x "$SCRIPT_PATH"
+    chown kids:kids "$SCRIPT_PATH"
+
+    # Add the script to autostart
+    AUTOSTART_DIR="/home/kids/.config/autostart"
+    mkdir -p "$AUTOSTART_DIR"
+    
+    cat > "$AUTOSTART_DIR/disable_winkey_sidebar.desktop" << EOF
+[Desktop Entry]
+Type=Application
+Exec=/home/kids/.config/disable_winkey_sidebar.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Disable Windows Key and Sidebar
+Name=Disable Windows Key and Sidebar
+Comment=Disables Windows key and sidebar for kids user
+EOF
+    
+    chown -R kids:kids "$AUTOSTART_DIR"
 }
 
 # Main script execution
@@ -147,6 +177,6 @@ configure_auto_login
 setup_chromium
 modify_hosts_file
 disable_initial_setup
-disable_windows_key_and_sidebar
+create_disable_script
 
 echo "Setup complete. Please reboot the system to apply changes."
