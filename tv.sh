@@ -12,17 +12,9 @@ check_sudo() {
 create_kids_user() {
     if id "kids" &>/dev/null; then
         echo "Existing 'kids' user found. Preparing for removal..."
-        
-        # Kill all processes owned by the 'kids' user
         pkill -u kids
-        
-        # Wait a moment to ensure processes are terminated
         sleep 2
-        
-        # Force logout of 'kids' user if logged in
         pkill -KILL -u kids
-        
-        # Delete the user and their home directory
         echo "Deleting existing 'kids' user"
         userdel -r kids
     fi
@@ -47,19 +39,13 @@ configure_auto_login() {
 # Function to set up Chromium
 setup_chromium() {
     echo "Setting up Chromium"
-    
-    # Install Chromium
     apt-get update
     apt-get install -y chromium-browser
 
-    # Define homepage
     HOMEPAGE="http://devxt-nas01:31437"
-
-    # Create Chromium policies directory
     POLICIES_DIR="/etc/chromium-browser/policies/managed"
     mkdir -p "$POLICIES_DIR"
 
-    # Create policy file to set homepage and other settings
     cat > "$POLICIES_DIR/kids_policy.json" << EOF
 {
     "HomepageLocation": "$HOMEPAGE",
@@ -75,12 +61,10 @@ setup_chromium() {
 }
 EOF
 
-    # Create autostart directory for kids user
     AUTOSTART_DIR="/home/kids/.config/autostart"
     mkdir -p "$AUTOSTART_DIR"
     chown kids:kids "$AUTOSTART_DIR"
 
-    # Create autostart entry for Chromium in kiosk mode
     cat > "$AUTOSTART_DIR/chromium-kiosk.desktop" << EOF
 [Desktop Entry]
 Type=Application
@@ -98,8 +82,6 @@ EOF
 # Function to modify hosts file for redirecting websites
 modify_hosts_file() {
     echo "Modifying hosts file to redirect certain websites"
-    
-    # Define the websites to be redirected
     WEBSITES=(
         "www.youtube.com"
         "youtube.com"
@@ -108,65 +90,73 @@ modify_hosts_file() {
         "facebook.com"
         "www.tiktok.com"
         "tiktok.com"
-        # Add more websites as needed
     )
     
-    # Backup the original hosts file
     cp /etc/hosts /etc/hosts.backup
     
-    # Add redirects to the hosts file
     for site in "${WEBSITES[@]}"; do
         if ! grep -q "$site" /etc/hosts; then
             echo "127.0.0.1 $site" >> /etc/hosts
         fi
     done
-    
-    echo "Hosts file modified. Specified websites will be redirected to localhost."
 }
 
 # Function to disable Ubuntu initial setup
 disable_initial_setup() {
     echo "Disabling Ubuntu initial setup"
     if [ -f /etc/xdg/autostart/gnome-initial-setup-first-login.desktop ]; then
-        echo "X-GNOME-Autostart-enabled=false" >> /etc/xdg/autostart/gnome-initial-setup-first-login.desktop
+        mv /etc/xdg/autostart/gnome-initial-setup-first-login.desktop /etc/xdg/autostart/gnome-initial-setup-first-login.desktop.disabled
     fi
     if [ -f /etc/xdg/autostart/gnome-welcome-tour.desktop ]; then
-        echo "X-GNOME-Autostart-enabled=false" >> /etc/xdg/autostart/gnome-welcome-tour.desktop
+        mv /etc/xdg/autostart/gnome-welcome-tour.desktop /etc/xdg/autostart/gnome-welcome-tour.desktop.disabled
     fi
 }
 
-# Function to create a script that disables Windows key and sidebar
-create_disable_script() {
-    echo "Creating script to disable Windows key and sidebar"
-    SCRIPT_PATH="/home/kids/.config/disable_winkey_sidebar.sh"
-    
+# Function to disable Windows key, sidebar, and other unwanted features
+disable_features() {
+    echo "Disabling Windows key, sidebar, and other features"
+
+    # Disable Ubuntu dock system-wide
+    gsettings set org.gnome.shell enabled-extensions "[]"
+    gsettings set org.gnome.shell disabled-extensions "['ubuntu-dock@ubuntu.com']"
+
+    # Disable overlay-key (Windows key) system-wide
+    gsettings set org.gnome.mutter overlay-key ''
+
+    # Disable hot corners system-wide
+    gsettings set org.gnome.desktop.interface enable-hot-corners false
+
+    # Create a script to apply these settings for the kids user on login
+    SCRIPT_PATH="/home/kids/.config/disable_features.sh"
     cat > "$SCRIPT_PATH" << EOF
 #!/bin/bash
-gsettings set org.gnome.mutter overlay-key ''
+gsettings set org.gnome.shell enabled-extensions "[]"
 gsettings set org.gnome.shell disabled-extensions "['ubuntu-dock@ubuntu.com']"
+gsettings set org.gnome.mutter overlay-key ''
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 EOF
-    
+
     chmod +x "$SCRIPT_PATH"
     chown kids:kids "$SCRIPT_PATH"
 
-    # Add the script to autostart
+    # Add the script to autostart for the kids user
     AUTOSTART_DIR="/home/kids/.config/autostart"
     mkdir -p "$AUTOSTART_DIR"
-    
-    cat > "$AUTOSTART_DIR/disable_winkey_sidebar.desktop" << EOF
+    cat > "$AUTOSTART_DIR/disable_features.desktop" << EOF
 [Desktop Entry]
 Type=Application
-Exec=/home/kids/.config/disable_winkey_sidebar.sh
+Exec=/home/kids/.config/disable_features.sh
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=Disable Windows Key and Sidebar
-Name=Disable Windows Key and Sidebar
-Comment=Disables Windows key and sidebar for kids user
+Name[en_US]=Disable Unwanted Features
+Name=Disable Unwanted Features
+Comment=Disables Windows key, sidebar, and other features for kids user
 EOF
-    
     chown -R kids:kids "$AUTOSTART_DIR"
+
+    # Disable the GNOME shell completely for the kids user
+    sudo -u kids dconf write /org/gnome/desktop/session/session-name "'ubuntu'"
 }
 
 # Main script execution
@@ -177,6 +167,6 @@ configure_auto_login
 setup_chromium
 modify_hosts_file
 disable_initial_setup
-create_disable_script
+disable_features
 
 echo "Setup complete. Please reboot the system to apply changes."
