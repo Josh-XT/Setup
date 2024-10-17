@@ -12,8 +12,10 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 - [Setup Automation and Documentation](#setup-automation-and-documentation)
   - [Table of Contents 📖](#table-of-contents-)
-  - [Ubuntu Server Setup](#ubuntu-server-setup)
-  - [Ubuntu Workstation Setup](#ubuntu-workstation-setup)
+  - [Automatic Setup During Ubuntu Installation](#automatic-setup-during-ubuntu-installation)
+  - [Manual Setup after Ubuntu Installation](#manual-setup-after-ubuntu-installation)
+    - [Ubuntu Server Setup](#ubuntu-server-setup)
+    - [Ubuntu Workstation Setup](#ubuntu-workstation-setup)
   - [VSCode Setup](#vscode-setup)
     - [Settings](#settings)
     - [Extensions](#extensions)
@@ -24,7 +26,27 @@ _The scripts below will require modification unless you want my exact setup, whi
     - [Operating System Downloads](#operating-system-downloads)
     - [Software Downloads](#software-downloads)
 
-## Ubuntu Server Setup
+## Automatic Setup During Ubuntu Installation
+
+To automatically set up your environment during the Ubuntu installation process:
+
+1. Download the `cloud-init.yaml` file from this repository.
+2. When installing Ubuntu:
+   - For server installations using the ISO, you can pass this file using kernel parameters at boot time. Add `autoinstall ds=nocloud-net;s=https://raw.githubusercontent.com/Josh-XT/Setup/main/` to your kernel parameters.
+   - For cloud images or VMs, pass the `cloud-init.yaml` file directly to your hypervisor or cloud provider.
+
+This will automatically:
+
+- Install git
+- Clone this repository
+- Run the appropriate setup script based on whether it's a desktop or server environment
+- Set up necessary bash aliases
+
+After the installation is complete and you log in for the first time, your environment will already be set up according to the scripts in this repository.
+
+## Manual Setup after Ubuntu Installation
+
+### Ubuntu Server Setup
 
 The `ServerSetup.sh` is similar to the `WorkstationSetup.sh` script, but is geared towards installing the essentials that I need for a new [Ubuntu Server](https://ubuntu.com/download/server) virtual machine on any given project that I am working on.  This includes `Docker`, `NodeJS`, `Yarn`, `PowerShell`, `Python`, `.NET Runtimes` and all updates from `apt` and `snap`.  It also sets the timezone on the server to `America/New_York`.
 
@@ -37,7 +59,7 @@ cd Setup
 ./UbuntuSetup.sh
 ```
 
-## Ubuntu Workstation Setup
+### Ubuntu Workstation Setup
 
 The `WorkstationSetup.sh` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  `WorkstationSetup.sh` was created to work on `Ubuntu 24.04`, but may also work on other Debian-based distributions.
 

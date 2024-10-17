@@ -1,0 +1,35 @@
+#cloud-config
+
+# Update and upgrade packages
+package_update: true
+package_upgrade: true
+
+# Install necessary packages
+packages:
+  - git
+
+# Run commands to set up the environment
+runcmd:
+  # Clone the repository
+  - [ su, -c, "git clone https://github.com/Josh-XT/Setup /home/ubuntu/Setup", ubuntu ]
+  - [ chown, -R, ubuntu:ubuntu, /home/ubuntu/Setup ]
+  - [ chmod, +x, /home/ubuntu/Setup/*.sh ]
+  
+  # Detect if we're on a desktop or server environment
+  - |
+    if dpkg -l | grep -q ubuntu-desktop; then
+      su -c "/home/ubuntu/Setup/WorkstationSetup.sh" ubuntu
+    else
+      su -c "/home/ubuntu/Setup/UbuntuSetup.sh" ubuntu
+    fi
+
+# Set up the user's bash aliases
+write_files:
+  - path: /home/ubuntu/.bash_aliases
+    content: |
+      alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'
+      alias docker-compose='docker compose'
+    owner: ubuntu:ubuntu
+
+# Final message
+final_message: "The system is finally up, after $UPTIME seconds"
