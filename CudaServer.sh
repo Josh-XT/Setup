@@ -25,7 +25,7 @@ if ! command -v python3.10 &> /dev/null; then
         sudo DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
         sudo add-apt-repository -y ppa:deadsnakes/ppa
         sudo DEBIAN_FRONTEND=noninteractive apt-get update
-        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3.10 python3.10-venv python3.10-dev
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3.10 python3.10-venv python3.10-dev python3-pip
     elif command -v yum &> /dev/null; then
         sudo yum install -y centos-release-scl
         sudo yum install -y rh-python310
