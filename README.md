@@ -2,7 +2,7 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-Sponsor%20Josh%20XT-blue?logo=github&style=plastic)](https://github.com/sponsors/Josh-XT) [![PayPal](https://img.shields.io/badge/PayPal-Sponsor%20Josh%20XT-blue.svg?logo=paypal&style=plastic)](https://paypal.me/joshxt) [![Ko-Fi](https://img.shields.io/badge/Kofi-Sponsor%20Josh%20XT-blue.svg?logo=kofi&style=plastic)](https://ko-fi.com/joshxt)
 
-I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of either `Ubuntu`, `Pop!_OS`, or `Windows 11`. I have also documented my hardware setup and Visual Studio Code settings and extensions below.
+I created this repository to keep my own development setup documented so that I can stand up a new development environment easily if I ever need to.  The scripts below install and update everything I need for development and daily use after a fresh OS install of `Ubuntu 24.04` server or desktop. I have also documented my hardware setup and Visual Studio Code settings and extensions below.
 
 My recommendation is to fork this repository and modify the scripts to fit your own needs and so that you can document your own setup for yourself.
 
@@ -12,14 +12,8 @@ _The scripts below will require modification unless you want my exact setup, whi
 
 - [Setup Automation and Documentation](#setup-automation-and-documentation)
   - [Table of Contents 📖](#table-of-contents-)
-  - [Servers](#servers)
-    - [Ubuntu Server Setup](#ubuntu-server-setup)
-    - [AGiXT VM Setup](#agixt-vm-setup)
-  - [Workstations](#workstations)
-    - [Ubuntu Workstation Setup](#ubuntu-workstation-setup)
-      - [Ubuntu Local AI Setup](#ubuntu-local-ai-setup)
-    - [Windows Workstation Setup](#windows-workstation-setup)
-      - [Windows Local AI Setup](#windows-local-ai-setup)
+  - [Ubuntu Server Setup](#ubuntu-server-setup)
+  - [Ubuntu Workstation Setup](#ubuntu-workstation-setup)
   - [VSCode Setup](#vscode-setup)
     - [Settings](#settings)
     - [Extensions](#extensions)
@@ -30,9 +24,7 @@ _The scripts below will require modification unless you want my exact setup, whi
     - [Operating System Downloads](#operating-system-downloads)
     - [Software Downloads](#software-downloads)
 
-## Servers
-
-### Ubuntu Server Setup
+## Ubuntu Server Setup
 
 The `ServerSetup.sh` is similar to the `WorkstationSetup.sh` script, but is geared towards installing the essentials that I need for a new [Ubuntu Server](https://ubuntu.com/download/server) virtual machine on any given project that I am working on.  This includes `Docker`, `NodeJS`, `Yarn`, `PowerShell`, `Python`, `.NET Runtimes` and all updates from `apt` and `snap`.  It also sets the timezone on the server to `America/New_York`.
 
@@ -40,25 +32,14 @@ The `ServerSetup.sh` is similar to the `WorkstationSetup.sh` script, but is gear
 sudo apt update
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup
-./Setup/ServerSetup.sh
+sudo chmod +x Setup/*.sh
+cd Setup
+./UbuntuSetup.sh
 ```
 
-### AGiXT VM Setup
+## Ubuntu Workstation Setup
 
-The `AGiXTSetup.sh` script is used to set up a VM for AGiXT development on a fresh Linux install. It installs all necessary packages for the operating system, installed AGiXT, then runs AGiXT. This makes setting up a new VM for AGiXT development a breeze.
-
-```bash
-sudo apt update
-sudo apt install -y git
-git clone https://github.com/Josh-XT/Setup
-./Setup/AGiXTSetup.sh
-```
-
-## Workstations
-
-### Ubuntu Workstation Setup
-
-The `WorkstationSetup.sh` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  `WorkstationSetup.sh` was created to work on any `Ubuntu` based distrobution, such as `Pop!_OS`, `Mint`, etc.
+The `WorkstationSetup.sh` script handles all of my application installs and git configurations on a workstation so that I can stand up a new development environment for myself in minutes without missing any of my critical software or configurations.  `WorkstationSetup.sh` was created to work on `Ubuntu 24.04`, but may also work on other Debian-based distributions.
 
 Open terminal and copy/paste the following:
 
@@ -66,96 +47,17 @@ Open terminal and copy/paste the following:
 sudo apt update
 sudo apt install -y git
 git clone https://github.com/Josh-XT/Setup
+sudo chmod +x Setup/*.sh
 ```
 
 _**Note: WorkstationSetup.sh should be modified before running it so that you can enter your own details in the git config and add or remove any apt packages you might want or not want.  This script is specifically set up for me to use after a fresh image.**_
 
 ```bash
-./Setup/WorkstationSetup.sh
+cd Setup
+./WorkstationSetup.sh
 ```
 
 For more information, check out the [AGiXT](https://github.com/Josh-XT/AGiXT) repository.
-
-#### Ubuntu Local AI Setup
-
-First, make sure the [Cuda Toolkit](https://developer.nvidia.com/cuda-downloads) is installed as well as [Docker](https://www.docker.com/products/docker-desktop).  You will also need to install [NVIDIA Container Toolkit]
-
-To set up [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) and [AGiXT](https://github.com/Josh-XT/AGiXT), start with opening two separate terminals.
-
-If you want to run a different model in ezlocalai, modify the `.env` file per the instructions in the [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) repository.
-
-Terminal 1 (ezlocalai):
-
-```bash
-git clone https://github.com/DevXT-LLC/ezlocalai
-cd ezlocalai
-sudo pwsh ./start.ps1
-```
-
-Terminal 2 (AGiXT):
-
-```bash
-git clone https://github.com/Josh-XT/AGiXT
-cd AGiXT
-sudo pwsh ./AGiXT.ps1
-```
-
-Once both are running, you can navigate to <http://localhost:8501> for the AGiXT Streamlit interface to create and manage your artificial intelligence agents.
-
-### Windows Workstation Setup
-
-After a fresh Windows 11 install, open the Windows Store, get all updates, then run windows updates until caught up, then reboot.  After that, open PowerShell as an administrator and run the following commands:
-
-```bash
-Set-ExecutionPolicy Bypass
-winget install -e --id Microsoft.VisualStudioCode
-winget install -e --id Git.Git
-winget install -e --id Microsoft.PowerShell
-winget install -e --id Python.Python.3.10
-winget install -e --id Google.AndroidStudio
-winget install -e --id OpenJS.NodeJS.LTS
-winget install -e --id Oracle.JDK.19
-winget install -e --id Oracle.JavaRuntimeEnvironment
-winget install -e --id Microsoft.DotNet.SDK.Preview
-winget install -e --id Docker.DockerDesktop
-winget install -e --id Microsoft.PowerToys
-winget install -e --id Valve.Steam
-winget install -e --id Discord.Discord
-winget install -e --id Zoom.Zoom
-winget install -e --id OpenWhisperSystems.Signal
-winget install -e --id Google.Chrome
-winget install -e --id Brave.Brave
-winget install -e --id Spotify.Spotify
-winget install -e --id SlackTechnologies.Slack
-```
-
-Once the above commands are run, open `Visual Studio Code` and sign in with your GitHub account to sync settings and extensions.
-
-#### Windows Local AI Setup
-
-First, make sure the [Cuda Toolkit](https://developer.nvidia.com/cuda-downloads) is installed as well as [Docker Desktop](https://www.docker.com/products/docker-desktop).
-
-To set up [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) and [AGiXT](https://github.com/Josh-XT/AGiXT), start with opening two separate terminals.
-
-If you want to run a different model in ezlocalai, modify the `.env` file per the instructions in the [ezlocalai](https://github.com/DevXT-LLC/ezlocalai) repository.
-
-Terminal 1 (ezlocalai):
-
-```bash
-git clone https://github.com/DevXT-LLC/ezlocalai
-cd ezlocalai
-./start.ps1
-```
-
-Terminal 2 (AGiXT):
-
-```bash
-git clone https://github.com/Josh-XT/AGiXT
-cd AGiXT
-./AGiXT.ps1
-```
-
-Once both are running, you can navigate to <http://localhost:8501> for the AGiXT Streamlit interface to create and manage your artificial intelligence agents.
 
 ## VSCode Setup
 
@@ -269,18 +171,16 @@ In Linux, I use `Piper` to configure my mouse.  I have the following bindings se
 | G4 | Backward | `Backward` button in the web browser. |
 | G5 | Forward | `Forward` button in the web browser. |
 | G6/Target | CTRL + T | Open a new web browser tab. |
-| G7 | CTRL + SUPER + DOWNARROW | Navigate to the workspace down from the current one. |
-| G8 | CTRL + SUPER + UPARROW | Navigate to the workspace up from the current one. |
+| G7 | SUPER + PAGEDOWN | Navigate to the workspace down from the current one. |
+| G8 | SUPER + PAGEUP | Navigate to the workspace up from the current one. |
 | G9 | SUPER + B | Open a new web browser window. |
 
 ## Potentially Important Links
 
 ### Operating System Downloads
 
-- [Windows 11](https://www.microsoft.com/software-download/windows11)
 - [Ubuntu Server](https://ubuntu.com/download/server)
 - [Ubuntu Desktop](https://ubuntu.com/download/desktop)
-- [Pop!_OS](https://pop.system76.com/)
 
 ### Software Downloads
 
