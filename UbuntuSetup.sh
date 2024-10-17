@@ -26,6 +26,9 @@ if ! command -v python3.10 &> /dev/null; then
         sudo add-apt-repository -y ppa:deadsnakes/ppa
         sudo DEBIAN_FRONTEND=noninteractive apt-get update
         sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3.10 python3.10-venv python3.10-dev python3-pip
+        sudo ln -s /usr/lib/python3/dist-packages/apt_pkg.cpython-312-x86_64-linux-gnu.so /usr/lib/python3/dist-packages/apt_pkg.cpython-310-x86_64-linux-gnu.so
+        sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+        sudo update-alternatives --set python3 /usr/bin/python3.10
     elif command -v yum &> /dev/null; then
         sudo yum install -y centos-release-scl
         sudo yum install -y rh-python310
@@ -45,7 +48,7 @@ if ! python3.10 -m pip --version &> /dev/null; then
     python3.10 get-pip.py --user
     rm get-pip.py
 fi
-
+python3.10 -m pip install --upgrade pip setuptools wheel
 # Create aliases
 alias python=python3.10
 alias pip="python3.10 -m pip"

@@ -11,10 +11,6 @@ sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 sudo chmod +x UbuntuSetup.sh
 sudo ./UbuntuSetup.sh
-# Python
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
-sudo update-alternatives --set python3 /usr/bin/python3.10
-python3.10 -m pip install --upgrade pip setuptools wheel
 # Docker
 sudo usermod -aG docker $USER
 sudo systemctl restart docker
