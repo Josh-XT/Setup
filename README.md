@@ -2,9 +2,10 @@
 
     Öffne ein Terminal und erstelle eine neue Datei mit dem gewünschten Namen, zum Beispiel setup_kubuntu.sh:
 
-    bash
+'''bash
 
 nano setup_kubuntu.sh
+'''
 
 Füge den oben stehenden Skriptinhalt in die Datei ein und speichere sie mit Ctrl + O, dann beende den Editor mit Ctrl + X.
 
