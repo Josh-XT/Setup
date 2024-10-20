@@ -1,7 +1,7 @@
 Speichere das Skript:
 Öffne ein Terminal und erstelle eine neue Datei mit dem gewünschten Namen, zum Beispiel setup_kubuntu.sh:
 
-    bash
+bash
                     nano setup_kubuntu.sh
 
 
