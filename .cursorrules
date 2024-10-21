@@ -1,0 +1,231 @@
+{
+  "prioritäten": {
+    "high": [
+      "kritische_fehlerbehebungen",
+      "sicherheitsrelevante_tasks",
+      "automatische_duplikat_entfernung",
+      "rollback_on_failure",
+      "chaos_engineering_tests"
+    ],
+    "medium": [
+      "performance_verbesserungen",
+      "feature_implementierungen",
+      "scalability_testing",
+      "infrastruktur_automatisierung",
+      "erweiterte_api_überwachung",
+      "advanced_debugging",
+      "erweiterte_test_und_deployment_strategien",
+      "ki_optimierungen"
+    ],
+    "low": [
+      "dokumentation_aktualisieren",
+      "nicht_dringende_optimierungen",
+      "code_refactoring",
+      "dokumentationsunterstützung"
+    ]
+  },
+  "strategien": {
+    "effizienz_fokus": {
+      "beschreibung": "Setze auf Effizienz, wenn viele kleinere Aufgaben zu erledigen sind oder wenn die Token-Limitierung kritisch wird.",
+      "anwendung": [
+        "mehrere_features",
+        "kleinere_fehlerbehebungen",
+        "duplikate_entfernen"
+      ]
+    },
+    "qualität_fokus": {
+      "beschreibung": "Priorisiere Qualität und Wartbarkeit in sicherheitsrelevanten oder komplexen Bereichen.",
+      "anwendung": [
+        "sicherheitsaudits",
+        "datenbank_optimierung",
+        "wichtige_api_änderungen",
+        "veraltete_pakete_aktualisieren"
+      ]
+    },
+    "performance_fokus": {
+      "beschreibung": "Optimiere den Code für Performance und Skalierbarkeit, besonders bei Backend- und Datenbank-Optimierungen.",
+      "anwendung": [
+        "datenbank_queries",
+        "frontend_latenz",
+        "speicherverwaltung",
+        "caching",
+        "lastverteilung",
+        "performance_verbesserungen"
+      ]
+    },
+    "duplikat_fokus": {
+      "beschreibung": "Identifiziere und entferne Duplikate basierend auf Datum, Größe und Inhaltsvergleich.",
+      "anwendung": [
+        "duplikate_entfernen",
+        "content_vergleich",
+        "größenanalyse"
+      ]
+    },
+    "tests_required": {
+      "beschreibung": "Stelle sicher, dass alle neuen Funktionen durch Tests abgedeckt sind.",
+      "anwendung": [
+        "unit_tests",
+        "integration_tests",
+        "e2e_tests",
+        "mutation_tests"
+      ]
+    },
+    "token_effizienz_optimieren": {
+      "beschreibung": "Reduziere die Anzahl von API-Calls und gruppiere Tasks, um die Anzahl an verarbeiteten Token zu minimieren.",
+      "anwendung": [
+        "datenbank_calls_gruppieren",
+        "async_tasks",
+        "redundanz_reduzieren"
+      ]
+    },
+    "tests_on_critical_tasks": {
+      "beschreibung": "Stelle sicher, dass nach sicherheitsrelevanten Änderungen oder Datenbanksynchronisationen Tests ausgeführt werden.",
+      "anwendung": [
+        "sync_database",
+        "run_security_audit"
+      ]
+    },
+    "dependency_management": {
+      "beschreibung": "Stelle sicher, dass alle Abhängigkeiten regelmäßig überprüft und aktualisiert werden.",
+      "anwendung": [
+        "veraltete_pakete_aktualisieren",
+        "package_check",
+        "dependency_scanning"
+      ]
+    },
+    "datenbank_migrationen": {
+      "beschreibung": "Stelle sicher, dass vor und nach Migrationen Backups erstellt werden und Tests laufen.",
+      "anwendung": [
+        "datenbank_migrationen",
+        "backup_database",
+        "tests_required"
+      ]
+    },
+    "skalierbarkeits_fokus": {
+      "beschreibung": "Stelle sicher, dass der Code unter hoher Last performant bleibt.",
+      "anwendung": [
+        "scalability_testing",
+        "load_balancing",
+        "performance_optimierung"
+      ]
+    },
+    "infrastruktur_automatisierung": {
+      "beschreibung": "Automatisiere die Infrastruktur mit Unterstützung für Multi-Cloud-Deployments und Container-Orchestrierung.",
+      "anwendung": [
+        "multi_cloud_deployments",
+        "kubernetes_integration",
+        "terraform_scripts"
+      ]
+    },
+    "erweiterte_api_überwachung": {
+      "beschreibung": "Implementiere erweiterte Überwachungs- und Sicherheitsmaßnahmen auf API-Ebene.",
+      "anwendung": [
+        "rate_limiting",
+        "service_mesh_integration",
+        "api_throttling",
+        "feature_flags_api_level"
+      ]
+    },
+    "advanced_debugging": {
+      "beschreibung": "Nutze erweiterte Debugging-Tools für detaillierte Performance-Analysen und Fehlerbehebungen.",
+      "anwendung": [
+        "distributed_tracing",
+        "memory_leak_detection",
+        "traceability"
+      ]
+    },
+    "erweiterte_test_und_deployment_strategien": {
+      "beschreibung": "Implementiere fortgeschrittene Test- und Deployment-Strategien für höhere Zuverlässigkeit.",
+      "anwendung": [
+        "blue_green_deployments",
+        "mutation_testing",
+        "canary_releases",
+        "chaos_engineering"
+      ]
+    },
+    "ki_optimierungen": {
+      "beschreibung": "Setze KI ein, um Code-Optimierungen und Anomalieerkennung zu automatisieren.",
+      "anwendung": [
+        "code_optimierung_durch_ki",
+        "anomaly_detection"
+      ]
+    },
+    "dokumentationsunterstützung": {
+      "beschreibung": "Verbessere die Dokumentation durch automatische Diagrammerstellung und zentralisierte Verwaltung.",
+      "anwendung": [
+        "auto_architekturdiagramme",
+        "zentralisierte_dokumentation"
+      ]
+    }
+  },
+  "regeln_für_token_effizienz": {
+    "aufgaben_gruppieren": true,
+    "redundanz_vermeiden": true
+  },
+  "zusätzliche_regeln": {
+    "index_verwaltung": {
+      "beschreibung": "Überprüfe den Index im Root-Verzeichnis, speichere ihn als index und dokumentiere alle Änderungen.",
+      "anwendung": [
+        "index_überprüfen",
+        "index_aktualisieren",
+        "dokumentation_der_codeänderungen"
+      ]
+    },
+    "automatische_datenprüfung": {
+      "beschreibung": "Automatisiere die Überprüfung von Datum, Größe und Inhalt zur Identifikation von Duplikaten.",
+      "anwendung": [
+        "datum_vergleichen",
+        "größenanalyse",
+        "inhalt_vergleichen"
+      ]
+    },
+    "dependency_diagram": {
+      "enabled": true,
+      "output_format": "svg",
+      "include_external_dependencies": true,
+      "prioritize_security_risks": true,
+      "alert_on_vulnerable_dependencies": true
+    },
+    "sicherheitsaudits": {
+      "javascript": {
+        "tools": ["npm audit", "sonarqube"],
+        "focus": ["xss", "insecure_dependencies"]
+      },
+      "python": {
+        "tools": ["bandit", "safety"],
+        "focus": ["sql_injection", "untrusted_input"]
+      },
+      "api_security": {
+        "tools": ["zap", "burpsuite"],
+        "focus": ["csrf", "auth_injection", "rate_limiting"]
+      }
+    },
+    "test_strategien": {
+      "unit_tests": ["mandatory_for_all_features"],
+      "integration_tests": ["for_all_new_integrations"],
+      "e2e_tests": ["run_for_critical_user_paths"],
+      "performance_tests": {
+        "enabled": true,
+        "tools": ["lighthouse", "k6"]
+      },
+      "mutation_tests": {
+        "enabled": true,
+        "tools": ["stryker", "pitest"]
+      }
+    },
+    "logging_rules": {
+      "production": {
+        "level": "error",
+        "format": "json",
+        "external_logging": {
+          "enabled": true,
+          "services": ["sentry", "datadog"]
+        }
+      },
+      "development": {
+        "level": "debug",
+        "format": "text"
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+# Node und Build-Verzeichnisse
+node_modules/
+build/
+dist/
+logs/
+tmp/
+coverage/
+target/
+.cache/
+
+# Python-spezifische Dateien
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+*.lock
+Cargo.lock
+yarn.lock
+pnpm-lock.yaml
+
+# Temporäre und Cache-Dateien
+*.tmp
+*.log
+*.swp
+.DS_Store
+Thumbs.db
+
+# Umgebungs- und IDE-spezifische Dateien
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.idea/
+*.iml
+.rider/
+.vscode/
+*.editorconfig
+.idea/modules.xml
+
+# Backup-Verzeichnisse
+backups/
+
+# Sicherheits- und Konfigurationsdateien
+secrets.yaml
+.aws/
+.aws/credentials
+terraform.tfstate
+
+# Weitere temporäre Dateien und Caches
+docker-compose.override.yml
+.docker/
+.github/
+.circleci/
+.gitlab-ci.yml
+.vercel
+
+# Rust
+target/
+Cargo.lock
+
+# Golang
+bin/
+pkg/
+
+# Test Coverage
+coverage/
+
+# Temporäre Verzeichnisse
+tmp/
+
+# ESLint
+.eslintrc.js
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Abhängigkeiten
+/node_modules
+/.pnp
+.pnp.js
+
+# Produktions-Build
+/build
+/dist
+
+# Entwicklung
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log

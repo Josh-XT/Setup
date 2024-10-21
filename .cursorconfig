@@ -1,0 +1,414 @@
+{
+  "improvements_and_notes": {
+    "terminology": "Es ist klar, dass Aufgaben intelligent gruppiert und Token-Effizienz im Vordergrund stehen. Erwäge zusätzliche Hinweise für komplexe Features, wie z.B. Priorisierung von kritischen Pfaden bei Feature-Implementierungen."
+  },
+  "codebase_directory": "@Codebase",
+  "roadmap_files": "@roadmap*",
+  "rules_file": ".cursorrules",
+  "ignore_file": ".cursorignore",
+  "index_file": "index.txt",
+  "git": {
+    "username": "Vesias",
+    "email": "vesiassr@gmail.com",
+    "main_branch": "main",
+    "beta_branch": "beta",
+    "dev_branch": "dev"
+  },
+  "exclude": [
+    "node_modules/",
+    "build/",
+    "logs/",
+    "tests/",
+    "venv/",
+    "__pycache__/",
+    "*.egg-info/",
+    "*.lock",
+    "dist/",
+    "coverage/",
+    "target/",
+    "*.pyc",
+    "Cargo.lock",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    "tmp/",
+    ".cache/",
+    ".DS_Store",
+    ".env",
+    ".idea/",
+    ".vscode/",
+    "backups/",
+    "*.tmp",
+    "*.log",
+    "secrets.yaml",
+    ".aws/",
+    "terraform.tfstate"
+  ],
+  "settings": {
+    "codeCompletion": true,
+    "smartRewrites": {
+      "enabled": true,
+      "patterns": [
+        "repeated_code",
+        "common_templates",
+        "react_hooks",
+        "python_type_hints"
+      ]
+    },
+    "autoFixLinterErrors": true,
+    "promptOptimization": {
+      "level": "high",
+      "focus": "token_efficiency",
+      "strategies": [
+        "context_compression",
+        "semantic_chunking",
+        "redundancy_elimination"
+      ]
+    },
+    "autoBackupBeforeEdit": {
+      "enabled": true,
+      "fileTypes": [".py", ".js", ".ts"],
+      "excludeFolders": ["logs/", "tmp/"]
+    },
+    "rollbackOnError": true,
+    "autoDuplicateRemoval": true,
+    "indexManagement": {
+      "enabled": true,
+      "autoOptimize": true,
+      "multiIndexSupport": true
+    },
+    "ci_cd_integration": {
+      "enabled": true,
+      "tools": ["jenkins", "gitlab_ci", "github_actions", "travis", "circleci"],
+      "trigger_on": ["commit", "merge_request", "release"],
+      "environments": ["production", "staging", "development"],
+      "rollback_on_failure": true,
+      "feature_toggles": true,
+      "canary_releases": true,
+      "multi_cloud_support": true,
+      "cloud_providers": ["AWS", "Azure", "GCP"]
+    },
+    "syntax_highlighting": {
+      "languages": ["javascript", "python", "typescript", "css", "html"],
+      "themes": ["dark", "light"],
+      "custom_theme_support": {
+        "enabled": true,
+        "theme_location": "themes/custom_theme.json"
+      }
+    },
+    "error_tracking": {
+      "enabled": true,
+      "tools": ["sentry", "datadog"],
+      "reporting_frequency": "on_error",
+      "track_user_actions": true,
+      "action_log_duration": 10,
+      "alerting": {
+        "enabled": true,
+        "thresholds": {
+          "error_rate": 0.05,
+          "latency": 2000
+        },
+        "notifications": ["email", "slack"]
+      }
+    },
+    "automated_ui_tests": {
+      "enabled": true,
+      "tools": ["selenium", "cypress"],
+      "visual_regression_tests": true,
+      "performance_tests": {
+        "enabled": true,
+        "tools": ["lighthouse", "k6"]
+      }
+    },
+    "code_formatting": {
+      "enabled": true,
+      "tools": ["prettier", "black", "clang-format"],
+      "enforce_on_commit": true
+    },
+    "code_complexity": {
+      "enabled": true,
+      "tools": ["radon", "complexity-report"],
+      "report_on_commit": true
+    },
+    "database_monitoring": {
+      "enabled": true,
+      "tools": ["pg_stat_statements", "datadog"],
+      "alerts_on": ["slow_queries", "connection_limits"]
+    },
+    "scalability_testing": {
+      "enabled": true,
+      "tools": ["k6", "gatling"],
+      "simulate_traffic": true,
+      "report_on_completion": true
+    },
+    "frameworks": {
+      "react": true,
+      "nodejs": true,
+      "python": {
+        "type_hints": true,
+        "async_support": true
+      }
+    },
+    "linters": {
+      "javascript": ["eslint"],
+      "typescript": ["tslint", "eslint"],
+      "python": ["pylint", "flake8"]
+    },
+    "optimize_assets": {
+      "types": ["images", "css", "js", "audio", "video"],
+      "formats": ["jpg", "png", "webp", "mp4", "mp3", "ogg"]
+    },
+    "auto_run_tests_after_commit": true,
+    "infrastructure_as_code": {
+      "enabled": true,
+      "tools": ["terraform", "ansible"],
+      "container_orchestration": {
+        "enabled": true,
+        "tools": ["kubernetes"],
+        "manage_containers_in_production": true
+      },
+      "multi_cloud_support": true,
+      "cloud_providers": ["AWS", "Azure", "GCP"]
+    },
+    "docker_healthchecks": {
+      "enabled": true
+    },
+    "api_management": {
+      "feature_flags": {
+        "enabled": true,
+        "tools": ["launchdarkly", "unleash"],
+        "granularity": "api_level"
+      },
+      "rate_limiting": {
+        "enabled": true,
+        "strategy": "token_bucket",
+        "limits": {
+          "per_minute": 1000
+        }
+      },
+      "service_mesh": {
+        "enabled": true,
+        "tools": ["istio"],
+        "features": ["secure_communication", "traffic_management", "observability"]
+      }
+    },
+    "monitoring_and_observability": {
+      "distributed_tracing": {
+        "enabled": true,
+        "tools": ["jaeger", "opentelemetry"]
+      },
+      "memory_leak_detection": {
+        "enabled": true,
+        "tools": ["valgrind", "memwatch", "heapdump"]
+      },
+      "anomaly_detection": {
+        "enabled": true,
+        "tools": ["machine_learning_based"],
+        "use_cases": ["early_issue_detection"]
+      }
+    },
+    "deployment_strategies": {
+      "blue_green_deployments": {
+        "enabled": true
+      },
+      "canary_deployments": {
+        "enabled": true
+      }
+    },
+    "automated_tests": {
+      "unit_tests": {
+        "enabled": true,
+        "tools": ["jest", "pytest"]
+      },
+      "integration_tests": {
+        "enabled": true,
+        "tools": ["mocha", "pytest"]
+      },
+      "e2e_tests": {
+        "enabled": true,
+        "tools": ["selenium", "cypress"]
+      },
+      "performance_tests": {
+        "enabled": true,
+        "tools": ["lighthouse", "k6"]
+      },
+      "mutation_tests": {
+        "enabled": true,
+        "tools": ["stryker", "pitest"]
+      }
+    },
+    "ai_optimizations": {
+      "code_optimization": {
+        "enabled": true,
+        "tools": ["machine_learning_models"],
+        "based_on": ["historical_changes", "performance_data"]
+      },
+      "anomaly_detection": {
+        "enabled": true,
+        "tools": ["machine_learning_based"],
+        "use_cases": ["early_issue_detection"]
+      }
+    },
+    "documentation": {
+      "auto_generate_architecture_diagrams": {
+        "enabled": true,
+        "tools": ["plantuml", "mermaid"],
+        "trigger_on": ["code_change", "pr_merge"]
+      },
+      "api_documentation": {
+        "enabled": true,
+        "tools": ["swagger", "postman"],
+        "auto_update": true
+      },
+      "code_comments": {
+        "enforce_docstrings": true,
+        "ai_assisted_comment_generation": true
+      }
+    },
+    "chaos_engineering": {
+      "enabled": true,
+      "tools": ["chaos_monkey", "gremlin"],
+      "target_environments": ["staging", "testing"],
+      "focus_areas": ["resilience", "fault_tolerance"]
+    },
+    "performance_monitoring": {
+      "enabled": true,
+      "tools": ["new_relic", "datadog"],
+      "metrics": [
+        "response_time",
+        "throughput",
+        "error_rate",
+        "resource_utilization"
+      ],
+      "alerts": {
+        "threshold_breach": true,
+        "anomaly_detection": true
+      }
+    },
+    "feature_implementation": {
+      "critical_path_analysis": {
+        "enabled": true,
+        "tools": ["dependency_graph", "impact_analysis"],
+        "prioritize_high_impact_changes": true
+      }
+    },
+    "security_audits": {
+      "enabled": true,
+      "tools": ["snyk", "owasp_zap", "sonarqube"],
+      "scan_frequency": "daily",
+      "vulnerability_database": "updated_hourly"
+    }
+  },
+  "shortcuts": {
+    "run_tests": {
+      "action": "run_tests",
+      "test_type": ["unit", "integration", "performance", "mutation"],
+      "coverage_report": true
+    },
+    "sync_database": {
+      "action": "sync_database_schema",
+      "databases": ["production", "staging"],
+      "schema_source": "production"
+    },
+    "deploy_application": {
+      "action": "trigger_deployment",
+      "environment": "production",
+      "branch": "main",
+      "services": ["web", "api", "database"],
+      "strategy": "blue_green"
+    },
+    "update_dashboard": {
+      "action": "update_frontend",
+      "component": "Dashboard",
+      "content": "New tutorial and AI-driven insights"
+    },
+    "complete_task": {
+      "action": "mark_roadmap_task_complete",
+      "next_steps": [
+        "database_sharding",
+        "setup_cdn",
+        "optimize_ssr",
+        "implement_mfa"
+      ]
+    },
+    "rollback_changes": {
+      "action": "revert_to_previous_version",
+      "log": "Rollback to previous stable version due to errors",
+      "autoFix": true
+    },
+    "generate_docs": {
+      "action": "auto_generate_docs",
+      "api_version": "v1.2",
+      "output_format": "markdown",
+      "location": "docs/api"
+    },
+    "optimize_assets": {
+      "action": "run_optimizer",
+      "target_folder": "assets",
+      "types": ["images", "css", "js", "audio", "video"],
+      "formats": ["jpg", "png", "webp", "mp4", "mp3", "ogg"]
+    },
+    "run_security_audit": {
+      "action": "perform_security_audit",
+      "scope": ["dependencies", "codebase", "third_party_apis"]
+    },
+    "optimize_database": {
+      "action": "optimize_database",
+      "databases": ["production", "staging"],
+      "strategies": ["indexing", "vacuuming", "partitioning"]
+    },
+    "backup_database": {
+      "action": "create_backup",
+      "databases": ["production"],
+      "storage_location": "backups/production"
+    },
+    "create_release": {
+      "action": "generate_release",
+      "version": "v2.4.0",
+      "release_notes": "Performance improvements, bug fixes, and new features."
+    },
+    "notify_team": {
+      "action": "send_notification",
+      "platform": "slack",
+      "channel": "#dev-updates",
+      "message": "New release deployed: v2.4.0"
+    },
+    "refresh_cache": {
+      "action": "clear_cache",
+      "services": ["redis", "cdn", "browser"],
+      "components": ["frontend", "backend", "api"]
+    },
+    "restart_services": {
+      "action": "restart_services",
+      "services": ["nginx", "node", "postgres"]
+    },
+    "check_system_health": {
+      "action": "run_health_check",
+      "services": ["api", "database", "frontend"],
+      "metrics": ["uptime", "error_rate", "latency"]
+    },
+    "update_dependencies": {
+      "action": "run_command",
+      "command": "npm install"
+    },
+    "docker_compose_up": {
+      "action": "run_command",
+      "command": "docker compose up -d"
+    },
+    "git_pull": {
+      "action": "run_command",
+      "command": "git pull origin main"
+    },
+    "trigger_chaos_test": {
+      "action": "run_chaos_engineering",
+      "tools": ["chaos_monkey"],
+      "environment": "staging",
+      "scope": ["microservices", "database_connections"]
+    },
+    "pre_merge_check": {
+      "action": "run_tests",
+      "test_type": ["unit", "integration"],
+      "coverage_report": true,
+      "on_failure": "block_merge"
+    }
+  }
+}

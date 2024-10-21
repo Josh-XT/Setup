@@ -1,0 +1,86 @@
+{
+  "exclude": [
+    "node_modules/*",
+    "build/*",
+    "logs/*",
+    "tests/*",
+    "venv/*",
+    "__pycache__/*",
+    "*.egg-info/*",
+    "*.lock",
+    "dist/*",
+    "coverage/*",
+    "target/*",
+    "*.pyc",
+    "Cargo.lock",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    "tmp/*",
+    ".cache/*",
+    ".DS_Store",
+    ".env",
+    ".idea/*",
+    ".vscode/*",
+    "backups/*",
+    "*.tmp"
+  ],
+  "settings": {
+    "codeCompletion": true,
+    "smartRewrites": {
+      "enabled": true,
+      "patterns": [
+        "repeated_code",
+        "common_templates",
+        "react_hooks",
+        "python_type_hints"
+      ]
+    },
+    "autoFixLinterErrors": true,
+    "promptOptimization": {
+      "level": "high",
+      "focus": "token_efficiency"
+    },
+    "autoBackupBeforeEdit": {
+      "enabled": true,
+      "fileTypes": [
+        "*.py",
+        "*.js",
+        "*.ts"
+      ],
+      "excludeFolders": [
+        "logs/",
+        "tmp/"
+      ]
+    },
+    "rollbackOnError": true,
+    "autoDuplicateRemoval": true,
+    "indexManagement": {
+      "enabled": true,
+      "autoOptimize": true,
+      "multiIndexSupport": true
+    }
+  },
+  "shortcuts": {
+    "run_tests": {
+      "action": "run_tests",
+      "test_type": ["unit", "integration"],
+      "coverage_report": true
+    },
+    "sync_database": {
+      "action": "sync_database_schema",
+      "databases": ["production", "staging"],
+      "schema_source": "production"
+    },
+    "deploy_application": {
+      "action": "trigger_deployment",
+      "environment": "production",
+      "branch": "main",
+      "services": ["web", "api", "database"]
+    },
+    "update_dashboard": {
+      "action": "update_frontend",
+      "component": "Dashboard",
+      "content": "New tutorial and AI-driven insights"
+    }
+  }
+}
