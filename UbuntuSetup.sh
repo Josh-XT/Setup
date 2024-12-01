@@ -46,15 +46,22 @@ if ! python3.10 -m pip --version &> /dev/null; then
     rm get-pip.py
 fi
 python3.10 -m pip install --upgrade pip setuptools wheel
-# Create aliases
-alias python=python3.10
-alias pip="python3.10 -m pip"
-
-# Add aliases to .bashrc for persistence
-echo "alias python=python3.10" >> ~/.bashrc
-echo "alias pip='python3.10 -m pip'" >> ~/.bashrc
 
 log_message "Python 3.10 and pip installation and configuration completed."
+
+# Docker installation
+log_message "Starting Docker installation"
+if ! command -v docker &> /dev/null; then
+    log_message "Docker not found. Attempting to install..."
+    sudo apt-get update
+    sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+else
+    log_message "Docker is already installed."
+fi
 
 # Check for NVIDIA GPU
 if lspci | grep -i nvidia &> /dev/null; then
@@ -106,20 +113,6 @@ if lspci | grep -i nvidia &> /dev/null; then
     sudo systemctl restart docker
 else
     log_message "No NVIDIA GPU detected. Skipping NVIDIA driver and CUDA installation."
-fi
-
-# Docker installation
-log_message "Starting Docker installation"
-if ! command -v docker &> /dev/null; then
-    log_message "Docker not found. Attempting to install..."
-    sudo apt-get update
-    sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-else
-    log_message "Docker is already installed."
 fi
 
 # Verification
