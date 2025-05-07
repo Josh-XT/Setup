@@ -49,6 +49,25 @@ sudo snap install --edge spotify
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 nvm install --lts
 nvm use --lts
+
+# Flutter and Android Development
+# Android SDK dependencies
+sudo apt install -y openjdk-11-jdk
+sudo apt install -y android-sdk
+sudo apt install -y gradle
+sudo apt install -y adb
+sudo apt install -y libgl1-mesa-dev
+sudo apt install -y lib32stdc++6 lib32z1
+
+# Set up Flutter
+sudo apt install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+mkdir -p ~/development
+cd ~/development
+git clone https://github.com/flutter/flutter.git -b stable
+echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >> ~/.bashrc
+echo 'export ANDROID_HOME="$HOME/Android/Sdk"' >> ~/.bashrc
+echo 'export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"' >> ~/.bashrc
+
 # Additional updates
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh
 # Pop Shell
