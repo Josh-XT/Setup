@@ -63,6 +63,22 @@ else
 fi
 
 #-------------------------------------------------------------------------------
+# DOCKER PERMISSIONS & SERVICE SETUP
+#-------------------------------------------------------------------------------
+log_message "Configuring Docker permissions and service"
+
+# Add current user to docker group
+log_message "Adding user $USER to docker group"
+sudo usermod -aG docker "$USER"
+
+# Enable and start Docker service
+log_message "Enabling and starting Docker service"
+sudo systemctl enable docker
+sudo systemctl start docker
+
+log_message "Docker permissions configured. You may need to log out and back in for group changes to take effect."
+
+#-------------------------------------------------------------------------------
 # VERIFICATION
 #-------------------------------------------------------------------------------
 log_message "Verifying installations."
@@ -70,4 +86,4 @@ docker --version
 docker compose version
 python3 --version
 
-log_message "Setup complete. Please reboot or source your .bash_aliases file to use new aliases."
+log_message "Setup complete. Please log out and back in (or reboot) for Docker group permissions to take effect, and source your .bash_aliases file to use new aliases."
