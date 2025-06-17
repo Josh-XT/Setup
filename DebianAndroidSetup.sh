@@ -8,7 +8,7 @@ set -e
 
 # Update package list and install prerequisites
 sudo apt-get update
-sudo apt-get install -y curl git python3-pip python3-venv
+sudo apt-get install -y curl git python3-pip
 
 # Configure Git
 git config --global submodule.recurse true
@@ -17,7 +17,6 @@ git config --global user.email "admin@agixt.com"
 git config --global user.name "admin"
 
 # Upgrade pip and install common Python packages
-python3 -m pip install --upgrade pip --break-system-packages
 pip install --upgrade setuptools wheel tzlocal python-dotenv --break-system-packages
 
 # Create aliases in .bash_aliases
