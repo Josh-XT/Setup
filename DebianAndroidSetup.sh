@@ -9,7 +9,7 @@ git config --global user.email "admin@agixt.com"
 git config --global user.name "admin"
 sudo apt install curl python3-pip -y
 python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade setuptools wheel tzlocal python-dotenv
+pip3 install --upgrade setuptools wheel tzlocal python-dotenv --break-system-packages
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo snap refresh'" > "$HOME/.bash_aliases"
 echo "alias docker-compose='docker compose'" >> "$HOME/.bash_aliases"
 echo "alias python='python3'" >> "$HOME/.bash_aliases"
