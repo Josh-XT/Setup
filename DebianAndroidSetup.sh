@@ -17,7 +17,7 @@ git config --global user.email "admin@agixt.com"
 git config --global user.name "admin"
 
 # Upgrade pip and install common Python packages
-pip install --upgrade tzlocal python-dotenv --break-system-packages
+pip install tzlocal python-dotenv --break-system-packages
 
 # Create aliases in .bash_aliases
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'" > "$HOME/.bash_aliases"
