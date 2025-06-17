@@ -17,7 +17,7 @@ git config --global user.email "admin@agixt.com"
 git config --global user.name "admin"
 
 # Upgrade pip and install common Python packages
-python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade pip --break-system-packages
 pip install --upgrade setuptools wheel tzlocal python-dotenv --break-system-packages
 
 # Create aliases in .bash_aliases
